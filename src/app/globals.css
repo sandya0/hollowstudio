@@ -1,38 +1,64 @@
 @import "tailwindcss";
 
+/* 1. FONT SETUP */
+@font-face {
+  font-family: 'Inter';
+  src: url("/fonts/InterDisplay-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: semibold;
+  font-display: swap; /* Improves perceived load speed */
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url("/fonts/Anton-Regular.ttf") format("truetype"); /* Fixed format string */
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2. THEME CONFIGURATION (Tailwind v4) */
 @theme {
+  /* Colors - Generates text-brand-black, bg-brand-red, etc. */
   --color-brand-black: #1a1a1a;
   --color-brand-red: #FF4B33;
   --color-brand-white: #F2F0EF;
   --color-brand-grey: #9A9A9A;
 
+  /* Fonts - Generates font-headline, font-body */
   --font-headline: 'Anton', sans-serif;
   --font-body: 'Inter', sans-serif;
 
+  /* Spacing - Generates p-gutter, m-margin, gap-gutter, etc. */
   --spacing-gutter: 36px;
   --spacing-margin: 48px;
 }
 
+/* 3. CUSTOM UTILITIES */
 @layer utilities {
   .text-display {
     @apply font-headline text-[228px] xl:text-[228px] leading-[0.9] tracking-[-0.02em] uppercase;
   }
+  
   .text-h1 {
     @apply font-body text-[36px] font-semibold leading-[1.2] tracking-[-0.05em];
   }
+  
   .text-h2 {  
-    @apply font-body text-[24px] font-medium leading-[1.2] tracking-[-0.03em];
+    @apply font-body text-[24px] font-semibold leading-[1.2] tracking-[-0.03em];
   }
+  
   .text-h3 {
-    @apply font-body text-[20px] font-normal leading-[1.4] tracking-[-0.02em];
+    @apply font-body text-[20px] font-semibold leading-[1.4] tracking-[-0.02em];
   }
+  
   .text-h4 {
-    @apply font-body text-[16px] font-normal leading-[1.5] tracking-[-0.01em];
+    @apply font-body text-[16px] font-semibold leading-[1.5] tracking-[-0.01em];
   }
+  
   .text-h5 {
-    @apply font-body text-[14px] font-normal leading-[1.5] tracking-normal;
+    @apply font-body text-[14px] font-semibold leading-[1.5] tracking-normal;
   }
-
 }
 
 body {
