@@ -1,7 +1,7 @@
 'use client'
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
-import FluidAnimation from './FluidAnimation'
+// import FluidAnimation from './FluidAnimation'
 import FluidText from './FluidText'
 
 export default function Hero() {
@@ -41,7 +41,7 @@ export default function Hero() {
 
       {/* LAYER 1: Fluid Background */}
       <div className="absolute inset-0 z-0">
-        <FluidAnimation />
+        {/* <FluidAnimation /> */}
       </div>
 
       {/* LAYER 2: Fluid Text */}
