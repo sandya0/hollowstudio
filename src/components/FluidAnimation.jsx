@@ -24,7 +24,7 @@ export default function FluidAnimation() {
 
     // FPS cap
     let lastFrameTime = 0;
-    const TARGET_FPS = 50;
+    const TARGET_FPS = 35;
     const FRAME_TIME = 1000 / TARGET_FPS;
 
     // Init function
@@ -41,28 +41,28 @@ export default function FluidAnimation() {
       const ULTRA_LITE = false; // flip to force the ultra-lite preset
 
       // Performance-tuned config
-      config = {
-        SIM_RESOLUTION: 96,
-        DYE_RESOLUTION: 720,
-        DENSITY_DISSIPATION: 3.5,
-        VELOCITY_DISSIPATION: 1.7,
-        PRESSURE: 0.08,
-        PRESSURE_ITERATIONS: 10,
-        CURL: 2.5,
-        SPLAT_RADIUS: 0.18,
-        SPLAT_FORCE: 4000,
-        SHADING: true,
-        COLOR_UPDATE_SPEED: 10,
-        TRANSPARENT: true,
-      };
+        config = {
+          SIM_RESOLUTION: 56,
+          DYE_RESOLUTION: 384,
+          DENSITY_DISSIPATION: 3.8,
+          VELOCITY_DISSIPATION: 2.2,
+          PRESSURE: 0.05,
+          PRESSURE_ITERATIONS: 5,
+          CURL: 1.6,
+          SPLAT_RADIUS: 0.12,
+          SPLAT_FORCE: 2200,
+          SHADING: false,
+          COLOR_UPDATE_SPEED: 6,
+          TRANSPARENT: true,
+        };
+
 
       if (isLowEndDevice) {
-        config.SIM_RESOLUTION = 64;
-        config.DYE_RESOLUTION = 512;
-        config.PRESSURE_ITERATIONS = 6;
-        config.SHADING = false;
-        // Slightly ease splats on low-end
-        config.SPLAT_FORCE = 3000;
+          config.SIM_RESOLUTION = 40;
+          config.DYE_RESOLUTION = 256;
+          config.PRESSURE_ITERATIONS = 3;
+          config.CURL = 1.0;
+          config.SPLAT_FORCE = 1600;
       }
       if (ULTRA_LITE) {
         config.SIM_RESOLUTION = 48;
@@ -74,7 +74,7 @@ export default function FluidAnimation() {
       }
 
       // DPR clamp to avoid huge GL buffers on high-DPI displays
-      const DPR_LIMIT = 1.5;
+      const DPR_LIMIT = 1.0;  
       function resizeCanvas() {
         const dpr = Math.min(window.devicePixelRatio || 1, DPR_LIMIT);
         const width = Math.floor(window.innerWidth * dpr);
@@ -789,7 +789,7 @@ export default function FluidAnimation() {
         gl.uniform2f(pressureProgram.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
         gl.uniform1i(pressureProgram.uniforms.uDivergence, divergence.attach(0));
         // reduced iterations for perf (config.PRESSURE_ITERATIONS)
-        for (let i = 0; i < config.PRESSURE_ITERATIONS; i++) {
+        for (let i = 0; i < Math.min(config.PRESSURE_ITERATIONS, 4); i++) {
           gl.uniform1i(pressureProgram.uniforms.uPressure, pressure.read.attach(1));
           blit(pressure.write);
           pressure.swap();

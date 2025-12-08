@@ -271,19 +271,11 @@ export default function FluidText({ text = "FLUID" }) {
     // Fullscreen quad setup (one buffer reused)
     const quadBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]),
-      gl.STATIC_DRAW
-    );
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
 
     const quadIndexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, quadIndexBuffer);
-    gl.bufferData(
-      gl.ELEMENT_ARRAY_BUFFER,
-      new Uint16Array([0, 1, 2, 0, 2, 3]),
-      gl.STATIC_DRAW
-    );
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
 
     function blit(target, program) {
       // Bind quad
@@ -429,7 +421,13 @@ export default function FluidText({ text = "FLUID" }) {
     // ---------- Render Loop ----------
     let animationId = null;
 
-    function render() {
+    function render(time) {
+        if (time - lastTime < 1000 / targetFPS) {
+       animationId = requestAnimationFrame(render);
+        return;
+      }
+      lastTime = time;
+
       const dt = 1.0 / 60.0;
 
       // SPLAT from pointer movement
@@ -446,8 +444,9 @@ export default function FluidText({ text = "FLUID" }) {
         gl.uniform2f(splatProg.uniforms.u_point, px, py);
 
         // pointer vec -> velocity splat
-        const vx = Math.max(-40, Math.min(40, pointer.dx)) * 0.001;
-        const vy = Math.max(-40, Math.min(40, pointer.dy)) * 0.001;
+        const scale = Math.min(1, Math.abs(pointer.dx + pointer.dy) / 50);
+        const vx = pointer.dx * 0.001 * scale;
+        const vy = pointer.dy * 0.001 * scale;
         gl.uniform3f(splatProg.uniforms.u_point_value, vx, -vy, 0.0);
         gl.uniform1f(splatProg.uniforms.u_point_size, params.cursorSize * 0.001);
         blit(velocity.write(), splatProg.prog);
@@ -472,7 +471,7 @@ export default function FluidText({ text = "FLUID" }) {
       gl.useProgram(pressureProg.prog);
       gl.uniform2f(pressureProg.uniforms.u_texel, velocity.texelSizeX, velocity.texelSizeY);
       gl.uniform1i(pressureProg.uniforms.u_divergence_texture, divergence.attach(1));
-      for (let i = 0; i < 16; i++) {
+      for (let i = 0; i < 4; i++) {
         gl.uniform1i(pressureProg.uniforms.u_pressure_texture, pressure.read().attach(2));
         blit(pressure.write(), pressureProg.prog);
         pressure.swap();
@@ -567,6 +566,11 @@ export default function FluidText({ text = "FLUID" }) {
     };
     wakeUp();
     setTimeout(wakeUp, 300);
+
+    let lastTime = 0;
+    const targetFPS = 144;
+    
+
 
     render();
 
