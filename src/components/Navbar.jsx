@@ -171,9 +171,9 @@ const Navbar = () => {
           </div>
           <div className="flex gap-4">
             {['Instagram', 'Twitter', 'LinkedIn'].map(social => (
-              <a key={social} href="#" className="text-sm text-white/70 uppercase tracking-widest hover:text-white">
+              <Link key={social} href="#" className="text-sm text-white/70 uppercase tracking-widest hover:text-white">
                 [{social}]
-              </a>
+              </Link>
             ))}
           </div>
         </div>

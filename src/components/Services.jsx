@@ -96,7 +96,7 @@ const Services = () => {
       {/* Main Headline */}
       <div className="relative z-10 mb-20 md:mb-32 min-w-[100%] mx-auto">
         <Text delay={0.1}>
-          <h2 className="text-3xl md:text-5xl lg:text-[64px] leading-[1.1] font-bold uppercase text-justify tracking-tight">
+          <h2 className="text-2xl md:text-5xl lg:text-[64px] leading-[1.1] font-bold uppercase tracking-tight">
             {/* Indentation Spacer */}
             <span className="inline-block w-16 md:w-32 lg:w-[15%] h-1 align-middle"></span>
             
@@ -116,13 +116,15 @@ const Services = () => {
             {/* Header (Icon + Title) */}
             <div className="service-header flex items-center gap-3 text-brand-white">
               {service.icon}
-              <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wide">
-                {service.title}
-              </h3>
+              <Text>
+                <h3 className="text-lg md:text-2xl font-bold uppercase tracking-wide">
+                  {service.title}
+                </h3>
+              </Text>
             </div>
             
             {/* Description - CHANGED TO WHITE */}
-            <div className="text-brand-white text-sm md:text-base leading-relaxed text-justify">
+            <div className="text-brand-white text-xs md:text-base leading-relaxed">
               <Text delay={0.2 + (index * 0.1)}>
                 <p>{service.description}</p>
               </Text>

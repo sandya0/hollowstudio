@@ -2,6 +2,8 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Text from './template/Text'
+import Link from './template/Link'
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -70,12 +72,16 @@ const Contact = () => {
              - items-end / text-right: Pushes all content to the right edge (towards the center gap).
           */}
           <div className="contact-reveal flex-1 w-full flex flex-col items-center md:items-end text-center md:text-right">
-            <h2 className="text-5xl md:text-7xl lg:text-[6rem] font-headline  uppercase tracking leading-[0.9]">
-              READY TO BE LOUD?
-            </h2>
-            <p className="text-brand-white text-sm md:text-base uppercase tracking-widest pl-1 mt-2">
-              Let's make something unforgettable
-            </p>
+            <Text>
+              <h2 className="text-5xl md:text-7xl lg:text-[6rem] font-headline  uppercase tracking leading-[0.9]">
+                READY TO BE LOUD?
+              </h2>
+            </Text>
+            <Text>
+              <p className="text-brand-white text-sm md:text-base uppercase tracking-widest pl-1 mt-2">
+                Let's make something unforgettable
+              </p>
+            </Text>
           </div>
 
           {/* RIGHT BLOCK 
@@ -127,21 +133,25 @@ const Contact = () => {
             <div ref={contentRef} className="min-h-[60px] pl-2">
               {activeTab === 'project' ? (
                 <div className="flex flex-col gap-1 items-center md:items-start">
-                  <span className="text-xs uppercase text-brand-grey tracking-widest">Drop us a line at</span>
-                  <a 
+                  <Text>
+                    <span className="text-xs uppercase text-brand-grey tracking-widest">Drop us a line at</span>
+                  </Text>
+                  <Link 
                     href="mailto:dhimassandya@gmail.com" 
                     className="text-xl md:text-2xl font-medium hover:text-brand-red transition-colors"
                   >
                     dhimassandya@gmail.com
-                  </a>
+                  </Link>
                 </div>
               ) : (
                 <div className="flex flex-col gap-1 items-center md:items-start">
-                   <span className="text-xs uppercase text-brand-grey tracking-widest">Stalk us on</span>
+                  <Text>
+                    <span className="text-xs uppercase text-brand-grey tracking-widest">Stalk us on</span>
+                  </Text>
                    <div className="flex gap-6 text-xl md:text-2xl font-medium">
-                      <a href="#" className="hover:text-brand-red transition-colors">Instagram</a>
-                      <a href="#" className="hover:text-brand-red transition-colors">LinkedIn</a>
-                      <a href="#" className="hover:text-brand-red transition-colors">Twitter</a>
+                      <Link href="#" className="hover:text-brand-red transition-colors">Instagram</Link>
+                      <Link href="#" className="hover:text-brand-red transition-colors">LinkedIn</Link>
+                      <Link href="#" className="hover:text-brand-red transition-colors">Twitter</Link>
                    </div>
                 </div>
               )}

@@ -69,7 +69,7 @@ export default function Text({ children, animateOnScroll = true, delay = 0.2 }) 
           ...animationProps,
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top 75%",
+            start: "top 100%",
             once: true,
           },
         });

@@ -385,8 +385,8 @@ export default function FluidText({ text = "FLUID" }) {
     textCtx.fillRect(0, 0, textCanvas.width, textCanvas.height);
 
     // Responsive font calculation
-    const paddingX = 24;
-    const paddingY = 24;
+    const paddingX = 36;
+    const paddingY = 36;
     const maxWidth = textCanvas.width - paddingX * 2;
     const maxHeight = textCanvas.height - paddingY * 2;
 
