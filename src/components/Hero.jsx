@@ -56,7 +56,7 @@ export default function Hero() {
           className="hero-footer w-full px-6 md:px-12 pb-8 md:pb-12 flex justify-between items-end"
         >
           <div className="max-w-[600px]">
-            <p className="font-body text-h1 text-brand-white">
+            <p className="font-body text-h1 text-brand-white uppercase">
               We are a web studio that builds{" "}
               <span className="text-brand-red font-semibold">bold</span>{" "}
               digital experiences for brands that want to{" "}
