@@ -51,7 +51,7 @@ export default function Hero() {
         >
           <div className="max-w-full lg:max-w-[700px]">
             <Text>
-              <p className="font-body text-[clamp(1rem,5vw,2.2rem)] leading-tight text-brand-white uppercase">
+              <p className="font-body text-lg lg:2xl xl:text-3xl 2xl:text-4xl leading-tight text-brand-white uppercase">
                 We are a web studio that builds{" "}
                 <span className="text-brand-red font-semibold">bold</span>{" "}
                 digital experiences for brands that want to{" "}
@@ -61,7 +61,7 @@ export default function Hero() {
             </Text>
           </div>
 
-          <div className="text-left md:text-right">
+          <div className="text-left lg:text-right">
             <Text>
               <span className="text-[10px] sm:text-xs uppercase tracking-[0.3em] text-brand-grey">
                 Scroll to explore
