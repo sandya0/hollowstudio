@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 
-export default function FluidAnimation() {
+export default function FluidAnimation({ onReady }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function FluidAnimation() {
         window.innerWidth < 768 ||
         /Mobi|Android/i.test(navigator.userAgent);
 
-      const ULTRA_LITE = false; // flip to force the ultra-lite preset
+      const ULTRA_LITE = false; 
 
       // Performance-tuned config
         config = {
@@ -1062,7 +1062,14 @@ export default function FluidAnimation() {
         animationId = requestAnimationFrame(update);
       }
 
+      // 1. START LOOP
       update();
+
+      // 2. TRIGGER READY (MOVED HERE)
+      // This is now reachable and fires as soon as the loop begins
+      if (onReady) {
+        onReady(true);
+      }
 
       // cleanup internal
       const cleanupInternal = () => {
@@ -1082,26 +1089,14 @@ export default function FluidAnimation() {
       return cleanupInternal;
     }; // end initFluid
 
-    // Start on DOM ready
-    let externalCleanup = null;
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      externalCleanup = initFluid();
-    } else {
-      const onLoad = () => {
-        externalCleanup = initFluid();
-      };
-      window.addEventListener('load', onLoad);
-      // ensure we remove listener if component unmounts before load
-      return () => {
-        window.removeEventListener('load', onLoad);
-        if (typeof externalCleanup === 'function') externalCleanup();
-      };
-    }
+    // 3. START IMMEDIATELY
+    // In React useEffect, we are already mounted, so we just run it.
+    const cleanup = initFluid();
 
-    // if initFluid returned cleanup, use it in unmount
     return () => {
-      if (typeof externalCleanup === 'function') externalCleanup();
+      if (typeof cleanup === 'function') cleanup();
     };
+
   }, []);
 
   return (
