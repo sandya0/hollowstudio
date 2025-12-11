@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       {/* Grid overlay layer */}
-      {/* <div className="grid-overlay" /> */}
+      <div className="grid-overlay" />
 
       <main className="relative">
         <Navbar />

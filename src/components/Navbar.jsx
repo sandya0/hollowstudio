@@ -15,7 +15,7 @@ const Navbar = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // 1. Target the WRAPPER (.nav-brand-wrapper), not the Link component directly
+      // --- NAV BRAND & OVERLAY SETUP ---
       gsap.from('.nav-brand-wrapper', {
         y: -20,
         opacity: 0,
@@ -33,6 +33,11 @@ const Navbar = () => {
       gsap.set('.overlay-link-wrapper', { x: 50, autoAlpha: 0 })
       gsap.set('.overlay-contact', { x: 20, autoAlpha: 0 })
 
+      // --- BURGER MENU INITIAL STATE ---
+      gsap.set(topLineRef.current, { y: -5 }) 
+      gsap.set(bottomLineRef.current, { y: 5 }) 
+
+      // --- TIMELINE SETUP ---
       tl.current = gsap.timeline({ paused: true })
 
       tl.current
@@ -48,7 +53,6 @@ const Navbar = () => {
           ease: 'power3.inOut',
           pointerEvents: 'auto'
         }, 0)
-        // 2. Animate the wrappers in the overlay
         .to('.overlay-link-wrapper', {
           autoAlpha: 1,
           x: 0,
@@ -76,12 +80,32 @@ const Navbar = () => {
 
     if (!isOpen) {
       tl.current.play()
-      gsap.to(topLineRef.current, { rotate: 45, y: 6, duration: 0.25, ease: 'power2.out' })
-      gsap.to(bottomLineRef.current, { rotate: -45, y: -6, duration: 0.25, ease: 'power2.out' })
+      gsap.to(topLineRef.current, { 
+        rotate: 45, 
+        y: 0, 
+        duration: 0.25, 
+        ease: 'power2.out' 
+      })
+      gsap.to(bottomLineRef.current, { 
+        rotate: -45, 
+        y: 0, 
+        duration: 0.25, 
+        ease: 'power2.out' 
+      })
     } else {
       tl.current.reverse()
-      gsap.to(topLineRef.current, { rotate: 0, y: 0, duration: 0.25, ease: 'power2.out' })
-      gsap.to(bottomLineRef.current, { rotate: 0, y: 0, duration: 0.25, ease: 'power2.out' })
+      gsap.to(topLineRef.current, { 
+        rotate: 0, 
+        y: -5, 
+        duration: 0.25, 
+        ease: 'power2.out' 
+      })
+      gsap.to(bottomLineRef.current, { 
+        rotate: 0, 
+        y: 5, 
+        duration: 0.25, 
+        ease: 'power2.out' 
+      })
     }
 
     setIsOpen(prev => !prev)
@@ -95,68 +119,66 @@ const Navbar = () => {
 
   return (
     <div ref={containerRef}>
-      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-6 md:py-9 mix-blend-difference text-white">
+      {/* UPDATED: text-brand-white */}
+      <nav className="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 md:px-12 py-6 md:py-9 mix-blend-difference text-brand-white">
         
-        {/* FIX 1: Wrapped the Brand Link. GSAP targets .nav-brand-wrapper */}
         <div className="nav-brand-wrapper z-50">
-          <Link href="/" className="cursor-pointer">
-             {/* Assuming the Link renders children, otherwise pass label as prop */}
+          {/* UPDATED: Added hover:text-brand-red */}
+          <Link href="/" className="cursor-pointer hover:text-brand-red transition-colors duration-300 block">
             <span className="text-[20px] md:text-[28px] tracking-tighter font-bold uppercase">
-               {/* Add your logo text here if needed, currently empty in your code */}
             </span>
           </Link>
         </div>
 
         <div className="flex items-center gap-[60px]">
-          {/* FIX 2: Desktop Links Container. 
-              The GSAP opacity animation targets 'desktopLinksRef' (the parent div), 
-              so it won't conflict with internal Link animations. */}
           <div
             ref={desktopLinksRef}
             className="hidden md:flex items-center gap-16 font-bold uppercase tracking-wide"
           >
             {navLinks.map(item => (
-              <div key={item.name} className="relative group">
+              <div key={item.name}>
+                {/* UPDATED: Removed Underline Span & Group logic. Added hover:text-brand-red */}
                 <Link
                   href={item.href}
-                  className="hover:text-gray-300 transition-colors block"
+                  className="hover:text-brand-red transition-colors duration-300 block"
                 >
                   {item.name}
                 </Link>
-                {/* Moved the underline effect to a standalone span to avoid conflict with Link component styles */}
-                <span className="absolute -bottom-1 left-0 h-[1px] w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
               </div>
             ))}
           </div>
 
           <button
             onClick={toggleMenu}
-            className="z-50 flex flex-col justify-center gap-[6px] w-8 h-8 cursor-pointer"
+            className="relative z-50 w-8 h-8 cursor-pointer block group"
+            aria-label="Toggle Menu"
           >
-            <span ref={topLineRef} className="w-full h-[2px] bg-white block"></span>
-            <span ref={bottomLineRef} className="w-full h-[2px] bg-white block"></span>
+            {/* UPDATED: bg-white -> bg-brand-white */}
+            {/* Optional: If you want the lines to turn red on hover too, add group-hover:bg-brand-red */}
+            <span 
+              ref={topLineRef} 
+              className="absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"
+            ></span>
+            <span 
+              ref={bottomLineRef} 
+              className="absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"
+            ></span>
           </button>
         </div>
       </nav>
 
       <div
         ref={navOverlayRef}
-        className="fixed inset-0 z-40 bg-black flex flex-col justify-center px-10 md:w-1/2 md:left-1/2 md:border-l md:border-white/10"
+        className="fixed inset-0 z-40 bg-black flex flex-col justify-center px-10 md:w-1/2 md:left-1/2 md:border-l md:border-brand-white/10"
       >
         <div className="flex flex-col gap-6 mb-12">
           {navLinks.map(item => (
-            // FIX 3: Wrapper for Overlay Links.
-            // GSAP animates '.overlay-link-wrapper', leaving <Link> alone.
             <div key={item.name} className="overlay-link-wrapper overflow-hidden">
-               {/* NOTE: If your Link component has an internal onClick, 
-                  passing onClick={toggleMenu} might override it. 
-                  If navigation breaks, move toggleMenu to the wrapper div (with limitations)
-                  or ensure your Custom Link forwards the onClick prop.
-               */}
+              {/* UPDATED: text-brand-white, hover:text-brand-red */}
               <Link
                 href={item.href}
                 onClick={toggleMenu} 
-                className="text-5xl md:text-6xl font-bold uppercase text-white hover:text-gray-400 transition-colors tracking-tight block"
+                className="text-5xl md:text-6xl font-bold uppercase text-brand-white hover:text-brand-red transition-colors duration-300 tracking-tight block"
               >
                 {item.name}
               </Link>
@@ -164,14 +186,21 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="overlay-contact flex flex-col gap-6 pt-10 border-t border-white/20">
+        {/* UPDATED: Border color */}
+        <div className="overlay-contact flex flex-col gap-6 pt-10 border-t border-brand-white">
           <div>
-            <p className="tracking-wider text-white/50 text-xs uppercase mb-1">Get in touch</p>
-            <p className="text-xl text-white tracking-widest">hello@hollowstudio.com</p>
+            {/* UPDATED: text colors */}
+            <p className="tracking-wider text-brand-white text-xs uppercase mb-1">Get in touch</p>
+            <p className="text-xl text-brand-white tracking-widest">hello@hollowstudio.com</p>
           </div>
           <div className="flex gap-4">
             {['Instagram', 'Twitter', 'LinkedIn'].map(social => (
-              <Link key={social} href="#" className="text-sm text-white/70 uppercase tracking-widest hover:text-white">
+              // UPDATED: text-brand-white/70, hover:text-brand-red
+              <Link 
+                key={social} 
+                href="#" 
+                className="text-sm text-brand-white uppercase tracking-widest hover:text-brand-red transition-colors duration-300"
+              >
                 [{social}]
               </Link>
             ))}

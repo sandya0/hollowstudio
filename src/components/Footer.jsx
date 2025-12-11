@@ -40,10 +40,10 @@ const Footer = () => {
       <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('/noise.png')] mix-blend-overlay"></div>
 
       {/* Main Top Content */}
-      <div className="relative z-10 flex flex-col md:flex-row justify-between items-start gap-16 md:gap-0 mb-32 md:mb-48">
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-y-16 gap-x-0 mb-32 md:mb-48">
         
         {/* Left: Brand Logo */}
-        <div className="footer-item">
+        <div className="footer-item md:col-span-4">
           <Link href="/" className="group block">
             <Text>
               <div className="text-4xl md:text-6xl font-headline uppercase tracking-normal flex items-center gap-1">
@@ -53,11 +53,12 @@ const Footer = () => {
           </Link>
         </div>
 
+
         {/* Right: Navigation Columns */}
-        <div className="flex gap-16 md:gap-32">
+        
           
           {/* Menu Column */}
-          <div className="footer-item flex flex-col gap-6">
+          <div className="footer-item flex flex-col md:col-[10/span_1]">
             <Text>
               <h3 className="text-xs uppercase tracking-widest text-brand-grey font-medium">Menu</h3>
             </Text>
@@ -75,7 +76,7 @@ const Footer = () => {
           </div>
 
           {/* Socials Column */}
-          <div className="footer-item flex flex-col gap-6">
+          <div className="footer-item flex flex-col md:col-[11/span_1]">
             <Text>
               <h3 className="text-xs uppercase tracking-widest text-brand-grey font-medium">Socials</h3>
             </Text>
@@ -94,7 +95,7 @@ const Footer = () => {
             </nav>
           </div>
 
-        </div>
+        
       </div>
 
       {/* Bottom Row: Copyright & Credits */}
