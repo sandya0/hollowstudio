@@ -1110,7 +1110,8 @@ export default function FluidAnimation({ onReady }) {
         height: '100vh',
         touchAction: 'none',
         background: 'transparent',
-        display: 'block'
+        display: 'block',
+        pointerEvents: 'none'
       }}
     />
   );
