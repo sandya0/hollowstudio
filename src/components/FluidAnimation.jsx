@@ -1008,7 +1008,6 @@ export default function FluidAnimation({ onReady }) {
       };
 
       const handleTouchStart = (e) => {
-        e.preventDefault();
         const touches = e.targetTouches;
         const pointer = pointers[0];
         if (!hasInteracted) hasInteracted = true;
@@ -1020,7 +1019,6 @@ export default function FluidAnimation({ onReady }) {
       };
 
       const handleTouchMove = (e) => {
-        e.preventDefault();
         const touches = e.targetTouches;
         const pointer = pointers[0];
         for (let i = 0; i < touches.length; i++) {
@@ -1108,7 +1106,6 @@ export default function FluidAnimation({ onReady }) {
         inset: 0,
         width: '100vw',
         height: '100vh',
-        touchAction: 'none',
         background: 'transparent',
         display: 'block',
         pointerEvents: 'none'
