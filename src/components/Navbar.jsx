@@ -125,7 +125,7 @@ const Navbar = () => {
         <div className="nav-brand-wrapper z-50">
           {/* UPDATED: Added hover:text-brand-red */}
           <Link href="/" aria-label="Home" className="cursor-pointer hover:text-brand-red transition-colors duration-300 block">
-            <span className="text-[20px] md:text-[28px] tracking-tighter font-bold uppercase">
+            <span className="text-[20px] md:text-[28px] font-headline font-bold uppercase">
               Hollow Studio
             </span>
           </Link>
