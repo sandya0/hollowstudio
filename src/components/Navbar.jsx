@@ -199,7 +199,7 @@ const Navbar = () => {
               // UPDATED: text-brand-white/70, hover:text-brand-red
               <Link 
                 key={social} 
-                href="#" 
+                href={social === 'Instagram' ? 'https://www.instagram.com/hollowstudioco' : '#'}
                 className="text-sm text-brand-white uppercase tracking-widest hover:text-brand-red transition-colors duration-300"
               >
                 [{social}]

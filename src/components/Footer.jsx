@@ -36,8 +36,7 @@ const Footer = () => {
       ref={footerRef}
       className="relative w-full bg-brand-black text-brand-white pt-24 pb-12 px-6 md:px-12 overflow-hidden"
     >
-      {/* Background Texture */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('/noise.png')] mix-blend-overlay"></div>
+
 
       {/* Main Top Content */}
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-y-16 gap-x-0 mb-32 md:mb-48">
@@ -84,7 +83,7 @@ const Footer = () => {
               {['Instagram', 'LinkedIn', 'TikTok'].map((social) => (
                 <Link 
                   key={social} 
-                  href="#" 
+                  href={social === 'Instagram' ? 'https://www.instagram.com/hollowstudioco' : '#'}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-lg md:text-xl font-bold uppercase tracking-wide hover:text-brand-red transition-colors"

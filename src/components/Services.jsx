@@ -90,18 +90,17 @@ const Services = () => {
       ref={containerRef} 
       className="relative min-h-screen w-full bg-brand-black text-brand-white px-6 md:px-12 py-24 flex flex-col justify-between"
     >
-      {/* Background Texture */}
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('/noise.png')] mix-blend-overlay"></div>
+
 
       {/* Main Headline */}
       <div className="relative z-10 mb-20 xl:mb-32 min-w-[100%] mx-auto">
         <Text delay={0.1}>
-          <p className="text-xl md:text-3xl lg:text-[32px] xl:text-[48px] 2xl:text-[64px] leading-[1.1] font-bold uppercase tracking-tight">
+          <h2 className="text-xl md:text-3xl lg:text-[32px] xl:text-[48px] 2xl:text-[64px] leading-[1.1] font-bold uppercase tracking-tight">
             {/* Indentation Spacer */}
             <span className="inline-block w-16 md:w-32 lg:w-[15%] h-1 align-middle"></span>
             
             FROM FIRST IDEA TO FINAL BUILD, OUR PROCESS IS SIMPLE AND INTENTIONAL. WE START WITH <span className="text-brand-red">STRATEGY</span>, <span className="text-brand-red">DESIGN WITH PURPOSE</span>, AND <span className="text-brand-red">DEVELOP FOR PERFORMANCE</span>. EVERY STEP EXISTS FOR A REASON — TO CREATE WEBSITES THAT DON’T JUST LOOK GOOD, BUT WORK WELL.
-          </p>
+          </h2>
         </Text>
       </div>
 

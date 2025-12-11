@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   metadataBase: new URL('https://hollow.studio'),
-  title: "Hollow Studio",
-  description: "Digital design and development studio",
+  title: "Hollow Studio | Digital Design and Development",
+  description: "Hollow Studio is a digital design and development studio that builds bold, unforgettable web experiences. We partner with brands that want to stand out, not blend in. From first idea to final build, our process is simple, intentional, and focused on performance.",
   keywords: ["web design", "web development", "digital agency", "Hollow Studio", "design studio", "development studio"],
   openGraph: {
-    title: "Hollow Studio",
-    description: "Digital design and development studio",
+    title: "Hollow Studio | Digital Design and Development",
+    description: "Hollow Studio is a digital design and development studio that builds bold, unforgettable web experiences. We partner with brands that want to stand out, not blend in. From first idea to final build, our process is simple, intentional, and focused on performance.",
     url: "https://hollow.studio",
     siteName: "Hollow Studio",
     images: [
@@ -43,7 +43,7 @@ export default function RootLayout({ children }) {
     logo: 'https://hollow.studio/logo.png',
     description: 'Digital design and development studio.',
     sameAs: [
-      'https://www.instagram.com/hollowstudio',
+      'https://www.instagram.com/hollowstudioco',
       'https://www.linkedin.com/company/hollowstudio',
     ],
     image: 'https://hollow.studio/og-image.jpg',

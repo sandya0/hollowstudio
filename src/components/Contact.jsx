@@ -56,7 +56,7 @@ const Contact = () => {
       ref={containerRef}
       className="relative w-full min-h-screen bg-brand-black text-brand-white overflow-hidden flex flex-col justify-center"
     >
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('/noise.png')] mix-blend-overlay"></div>
+
 
       {/* Main Container with 36px side margins */}
       <div className="relative z-10 w-full px-[36px]">
@@ -149,7 +149,7 @@ const Contact = () => {
                     <span className="text-xs uppercase text-brand-grey tracking-widest">Stalk us on</span>
                   </Text>
                    <div className="flex gap-6 text-xl md:text-2xl font-medium">
-                      <Link href="#" className="hover:text-brand-red transition-colors">Instagram</Link>
+                      <Link href="https://www.instagram.com/hollowstudioco" className="hover:text-brand-red transition-colors">Instagram</Link>
                       <Link href="#" className="hover:text-brand-red transition-colors">LinkedIn</Link>
                       <Link href="#" className="hover:text-brand-red transition-colors">Twitter</Link>
                    </div>
