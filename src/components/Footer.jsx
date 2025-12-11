@@ -46,9 +46,9 @@ const Footer = () => {
         <div className="footer-item">
           <Link href="/" className="group block">
             <Text>
-              <h2 className="text-4xl md:text-6xl font-headline uppercase tracking-normal flex items-center gap-1">
+              <div className="text-4xl md:text-6xl font-headline uppercase tracking-normal flex items-center gap-1">
                 Hollow Studio
-              </h2>
+              </div>
             </Text>
           </Link>
         </div>

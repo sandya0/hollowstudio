@@ -99,7 +99,7 @@ export default function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full min-h-[100svh] overflow-hidden bg-brand-black text-brand-white"
+      className="relative w-full min-h-[100svh] bg-brand-black text-brand-white"
     >
       {/* --- PRELOADER --- */}
       <div 

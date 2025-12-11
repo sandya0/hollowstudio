@@ -96,12 +96,12 @@ const Services = () => {
       {/* Main Headline */}
       <div className="relative z-10 mb-20 xl:mb-32 min-w-[100%] mx-auto">
         <Text delay={0.1}>
-          <h2 className="text-xl md:text-3xl lg:text-[32px] xl:text-[48px] 2xl:text-[64px] leading-[1.1] font-bold uppercase tracking-tight">
+          <p className="text-xl md:text-3xl lg:text-[32px] xl:text-[48px] 2xl:text-[64px] leading-[1.1] font-bold uppercase tracking-tight">
             {/* Indentation Spacer */}
             <span className="inline-block w-16 md:w-32 lg:w-[15%] h-1 align-middle"></span>
             
             FROM FIRST IDEA TO FINAL BUILD, OUR PROCESS IS SIMPLE AND INTENTIONAL. WE START WITH <span className="text-brand-red">STRATEGY</span>, <span className="text-brand-red">DESIGN WITH PURPOSE</span>, AND <span className="text-brand-red">DEVELOP FOR PERFORMANCE</span>. EVERY STEP EXISTS FOR A REASON — TO CREATE WEBSITES THAT DON’T JUST LOOK GOOD, BUT WORK WELL.
-          </h2>
+          </p>
         </Text>
       </div>
 
