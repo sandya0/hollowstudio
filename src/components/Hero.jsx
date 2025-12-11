@@ -2,7 +2,6 @@
 import { useLayoutEffect, useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import imagesLoaded from 'imagesloaded'
-import FluidAnimation from './FluidAnimation'
 import FluidText from './FluidText'
 import Text from './template/Text'
 
@@ -15,7 +14,6 @@ export default function Hero() {
   const percentRef = useRef(null)
   
   // State to track readiness
-  const [webglReady, setWebglReady] = useState(false)
   const [isExitComplete, setIsExitComplete] = useState(false)
 
   // 1. Handle the Loading Logic
@@ -40,9 +38,7 @@ export default function Hero() {
     let animationFrameId
     
     const updateProgress = () => {
-      // Logic: If WebGL isn't ready, cap the target at 99%
-      // This makes the loader hang at 99% until the fluid simulation is ready
-      const effectiveTarget = webglReady ? target : Math.min(target, 99)
+      const effectiveTarget = target; // No longer waiting for WebGL
 
       // Lerp for smoothness
       current += (effectiveTarget - current) * 0.1
@@ -53,8 +49,7 @@ export default function Hero() {
       }
 
       // Check for completion
-      // Must be > 99.9 AND WebGL must be strictly true
-      if (current >= 99.9 && webglReady) {
+      if (current >= 99.9) {
         current = 100
         if (percentRef.current) percentRef.current.textContent = "100%"
         
@@ -82,7 +77,7 @@ export default function Hero() {
     updateProgress()
 
     return () => cancelAnimationFrame(animationFrameId)
-  }, [webglReady]) // Rerun logic when webglReady changes
+  }, []) // Removed webglReady from dependencies
 
 
   // 2. The Hero Entrance Animation
@@ -116,11 +111,7 @@ export default function Hero() {
       </div>
 
                   <h1 className="sr-only">HOLLO STUDIO - Web Design Agency</h1>
-      {/* Layer 1: Background Animation */}
-      <div className="absolute inset-0 z-0">
-        {/* Pass the setter function to the component */}
-        <FluidAnimation onReady={() => setWebglReady(true)} />
-      </div>
+      {/* Layer 1 is removed */}
 
       {/* Layer 2: Hero Text */}
       <div className="absolute inset-0 z-10 mix-blend-screen pointer-events-none select-none">
