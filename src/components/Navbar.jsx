@@ -2,6 +2,9 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import Link from './template/Link'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const containerRef = useRef(null)
@@ -9,6 +12,7 @@ const Navbar = () => {
   const desktopLinksRef = useRef(null)
   const topLineRef = useRef(null)
   const bottomLineRef = useRef(null)
+  const logoTextRef = useRef(null);
   const tl = useRef(null)
 
   const [isOpen, setIsOpen] = useState(false)
@@ -75,6 +79,25 @@ const Navbar = () => {
     return () => ctx.revert()
   }, [])
 
+  useLayoutEffect(() => {
+    const heroSection = document.querySelector('#hero-section');
+    if (heroSection) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroSection,
+          start: 'bottom top',
+          toggleActions: 'play none none reverse',
+        },
+      });
+
+      tl.to(logoTextRef.current, {
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power2.out',
+      });
+    }
+  }, []);
+
   const toggleMenu = () => {
     if (!tl.current) return
 
@@ -124,11 +147,11 @@ const Navbar = () => {
         
         <div className="nav-brand-wrapper z-50">
           {/* UPDATED: Added hover:text-brand-red */}
-          <Link href="/" aria-label="Home" className="cursor-pointer hover:text-brand-red transition-colors duration-300 block">
-            <span className="text-[20px] md:text-[28px] font-headline font-bold uppercase">
+          <a href="/" aria-label="Home" className="cursor-pointer hover:text-brand-red transition-colors duration-300 block">
+            <span ref={logoTextRef} className="text-[20px] md:text-[28px] font-headline tracking-wider font-bold uppercase opacity-0">
               Hollow Studio
             </span>
-          </Link>
+          </a>
         </div>
 
         <div className="flex items-center gap-[60px]">

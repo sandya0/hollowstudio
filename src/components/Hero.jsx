@@ -98,6 +98,7 @@ export default function Hero() {
 
   return (
     <section
+      id="hero-section"
       ref={containerRef}
       className="relative w-full min-h-[100svh] bg-brand-black text-brand-white"
     >
