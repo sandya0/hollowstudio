@@ -397,7 +397,7 @@ export default function FluidText({ text = "FLUID" }) {
     let scaleFactor = Math.min(maxWidth / textWidth, maxHeight / fontSize);
 
     // Clamp font size to reasonable range
-    fontSize = Math.max(40, Math.min(fontSize * scaleFactor, 320));
+    fontSize = Math.max(60, Math.min(fontSize * scaleFactor, 400));
     textCtx.font = `bold ${fontSize}px Anton, sans-serif`;
 
     // Draw text centered

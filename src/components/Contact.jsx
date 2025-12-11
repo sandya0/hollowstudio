@@ -65,14 +65,13 @@ const Contact = () => {
         <div className="flex flex-col md:flex-row items-center md:items-end w-full gap-6 md:gap-[36px]">
           
           {/* LEFT BLOCK (Main Headline) */}
-          <div className="contact-reveal flex-1 w-full flex flex-col items-center md:items-end text-center md:text-right">
-            <Text>
-              <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-[6rem] font-headline uppercase tracking-leading-[0.9] leading-none">
-                READY TO BE LOUD?
-              </h2>
-            </Text>
-          </div>
-
+                              <div className="contact-reveal flex-1 w-full flex flex-col items-center md:items-end text-center md:text-right">
+                                <Text>
+                                  <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-[6rem] font-headline uppercase tracking-leading-[0.9] leading-none">
+                                    MAKE AN IMPACT.
+                                  </h2>
+                                </Text>
+                              </div>
           {/* RIGHT BLOCK (Buttons) */}
           <div className="contact-reveal flex-1 w-full flex flex-col items-center md:items-start text-center md:text-left pb-1 md:pb-3">
             <div className="flex justify-center md:justify-start gap-3">
@@ -128,9 +127,8 @@ const Contact = () => {
           {/* LEFT BLOCK (Sub-text) */}
           <div className="contact-reveal flex-1 w-full flex flex-col items-center md:items-end text-center md:text-right">
             <Text>
-              {/* Added mt-1 to push the smaller text down slightly to match the visual top of the larger text on the right */}
               <p className="text-brand-white text-sm md:text-base uppercase tracking-widest pl-1 mt-1">
-                Let's make something unforgettable
+                Let's build something remarkable.
               </p>
             </Text>
           </div>
@@ -152,7 +150,7 @@ const Contact = () => {
                 <div className="flex flex-col gap-1 items-center md:items-start">
                     {/* Added leading-none */}
                     <div className="flex gap-6 text-xl md:text-2xl font-medium leading-none">
-                      <Link href="https://www.instagram.com/hollowstudioco" className="hover:text-brand-red transition-colors">Instagram</Link>
+                      <Link href="https://www.instagram.com/hollostudioco" className="hover:text-brand-red transition-colors">Instagram</Link>
                       <Link href="#" className="hover:text-brand-red transition-colors">LinkedIn</Link>
                       <Link href="#" className="hover:text-brand-red transition-colors">Twitter</Link>
                     </div>

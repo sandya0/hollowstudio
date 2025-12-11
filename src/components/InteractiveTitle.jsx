@@ -145,8 +145,7 @@ function LiquidPlane() {
             anchorX="center"
             anchorY="middle"
           >
-            HOLLOW STUDIO
-          </Text>
+                                    HOLLO STUDIO          </Text>
         </RenderTexture>
       </shaderMaterial>
     </mesh>

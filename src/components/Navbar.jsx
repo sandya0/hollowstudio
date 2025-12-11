@@ -149,7 +149,7 @@ const Navbar = () => {
           {/* UPDATED: Added hover:text-brand-red */}
           <a href="/" aria-label="Home" className="cursor-pointer hover:text-brand-red transition-colors duration-300 block">
             <span ref={logoTextRef} className="text-[20px] md:text-[28px] font-headline tracking-wider font-bold uppercase opacity-0">
-              Hollow Studio
+              Hollo Studio
             </span>
           </a>
         </div>
@@ -215,15 +215,14 @@ const Navbar = () => {
           <div>
             {/* UPDATED: text colors */}
             <p className="tracking-wider text-brand-white text-xs uppercase mb-1">Get in touch</p>
-            <p className="text-xl text-brand-white tracking-widest">hello@hollowstudio.com</p>
+            <p className="text-xl text-brand-white tracking-widest">hello@hollostudio.com</p>
           </div>
           <div className="flex gap-4">
             {['Instagram', 'Twitter', 'LinkedIn'].map(social => (
               // UPDATED: text-brand-white/70, hover:text-brand-red
               <Link 
                 key={social} 
-                href={social === 'Instagram' ? 'https://www.instagram.com/hollowstudioco' : '#'}
-                className="text-sm text-brand-white uppercase tracking-widest hover:text-brand-red transition-colors duration-300"
+                                            href={social === 'Instagram' ? 'https://www.instagram.com/hollostudioco' : '#'}                className="text-sm text-brand-white uppercase tracking-widest hover:text-brand-red transition-colors duration-300"
               >
                 [{social}]
               </Link>

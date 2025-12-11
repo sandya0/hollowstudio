@@ -115,8 +115,7 @@ export default function Hero() {
         </span>
       </div>
 
-      <h1 className="sr-only">HOLLOW STUDIO - Web Design Agency</h1>
-
+                  <h1 className="sr-only">HOLLO STUDIO - Web Design Agency</h1>
       {/* Layer 1: Background Animation */}
       <div className="absolute inset-0 z-0">
         {/* Pass the setter function to the component */}
@@ -125,8 +124,7 @@ export default function Hero() {
 
       {/* Layer 2: Hero Text */}
       <div className="absolute inset-0 z-10 mix-blend-screen pointer-events-none select-none">
-        <FluidText text="HOLLOW STUDIO" />
-      </div>
+                    <FluidText text="HOLLO STUDIO" />      </div>
 
       {/* Layer 3: Content/UI */}
       <div className="relative z-20 w-full min-h-[100svh] flex flex-col justify-end">
@@ -137,10 +135,7 @@ export default function Hero() {
           <div className="max-w-full lg:max-w-[700px]">
             <Text>
               <p className="font-body text-lg sm:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-tight text-brand-white uppercase">
-                We are a web studio that builds{" "}
-                <span className="text-brand-red font-semibold">bold</span>{" "}
-                digital experiences for brands that want to{" "}
-                <span className="text-brand-red font-semibold">stand out</span>,
+                We are a web studio that crafts digital experiences that <span className="text-brand-red font-semibold">make an impact</span> for brands that want to <span className="text-brand-red font-semibold">stand out</span>,
                 not blend in.
               </p>
             </Text>

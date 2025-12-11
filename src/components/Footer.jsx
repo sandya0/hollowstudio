@@ -46,7 +46,7 @@ const Footer = () => {
           <Link href="/" className="group block">
             <Text>
               <div className="text-3xl sm:text-4xl md:text-6xl font-headline uppercase tracking-normal flex items-center gap-1">
-                Hollow Studio
+                Hollo Studio
               </div>
             </Text>
           </Link>
@@ -83,8 +83,7 @@ const Footer = () => {
               {['Instagram', 'LinkedIn', 'TikTok'].map((social) => (
                 <Link 
                   key={social} 
-                  href={social === 'Instagram' ? 'https://www.instagram.com/hollowstudioco' : '#'}
-                  target="_blank" 
+                                              href={social === 'Instagram' ? 'https://www.instagram.com/hollostudioco' : '#'}                  target="_blank" 
                   rel="noopener noreferrer"
                   className="text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide hover:text-brand-red transition-colors"
                 >
@@ -102,8 +101,7 @@ const Footer = () => {
         
         <div className="footer-item text-brand-white/80">
           <Text>
-            <span>2025 | Hollow Studio</span>
-          </Text>
+                                        <span>2025 | Hollo Studio</span>          </Text>
         </div>
 
         <div className="footer-item text-brand-white/80">
