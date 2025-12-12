@@ -19,7 +19,7 @@ const Footer = () => {
       gsap.from('.footer-item', {
         scrollTrigger: {
           trigger: footerRef.current,
-          start: 'top 90%', // Triggers when top of footer hits 90% of viewport height
+          start: 'top 90%',
         },
         y: 30,
         opacity: 0,
@@ -34,15 +34,24 @@ const Footer = () => {
   return (
     <footer 
       ref={footerRef}
-      className="relative w-full bg-brand-black text-brand-white pt-16 md:pt-24 pb-8 md:pb-12 px-4 sm:px-6 md:px-12 overflow-hidden"
+      className="relative w-full min-h-[50vh] bg-brand-black text-brand-white pt-16 md:pt-24 pb-8 md:pb-12 overflow-hidden"
+      style={{
+        paddingLeft: 'var(--spacing-margin)',
+        paddingRight: 'var(--spacing-margin)'
+      }}
     >
-
-
-      {/* Main Top Content */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-16 gap-x-0 mb-20 md:mb-32 lg:mb-48">
+      {/* Main Top Content - Using custom grid system */}
+      <div 
+        className="relative z-10 mb-20 md:mb-32 lg:mb-48 grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-0"
+        style={{
+          gap: '0 var(--spacing-gutter)'
+        }}
+      >
         
         {/* Left: Brand Logo */}
-        <div className="footer-item md:col-span-4">
+        <div 
+          className="footer-item md:col-start-1 md:col-span-4"
+        >
           <Link href="/" className="group block">
             <Text>
               <div className="text-3xl sm:text-4xl md:text-6xl font-headline uppercase tracking-normal flex items-center gap-1">
@@ -52,10 +61,10 @@ const Footer = () => {
           </Link>
         </div>
 
-
-        {/* Right: Navigation Columns - Side by side on mobile */}
-        <div className="footer-item md:col-[10/span_2] grid grid-cols-2 gap-8 md:gap-0 md:grid-cols-2">
-          
+        {/* Right: Navigation Columns */}
+        <div 
+          className="footer-item grid grid-cols-2 gap-8 md:col-start-7 md:col-span-6"
+        >
           {/* Menu Column */}
           <div className="flex flex-col">
             <Text>
@@ -83,7 +92,8 @@ const Footer = () => {
               {['Instagram', 'LinkedIn', 'TikTok'].map((social) => (
                 <Link 
                   key={social} 
-                                              href={social === 'Instagram' ? 'https://www.instagram.com/hollostudioco' : '#'}                  target="_blank" 
+                  href={social === 'Instagram' ? 'https://www.instagram.com/hollostudioco' : '#'}
+                  target="_blank" 
                   rel="noopener noreferrer"
                   className="text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide hover:text-brand-red transition-colors"
                 >
@@ -92,16 +102,17 @@ const Footer = () => {
               ))}
             </nav>
           </div>
-
         </div>
       </div>
 
-      {/* Bottom Row: Copyright & Credits */}
-      <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-3 md:gap-4 text-xs md:text-sm font-medium uppercase tracking-wide">
-        
+      {/* Bottom Row */}
+      <div 
+        className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-3 md:gap-4 text-xs md:text-sm font-medium uppercase tracking-wide"
+      >
         <div className="footer-item text-brand-white/80">
           <Text>
-                                        <span>2025 | Hollo Studio</span>          </Text>
+            <span>2025 | Hollo Studio</span>
+          </Text>
         </div>
 
         <div className="footer-item text-brand-white/80">
@@ -109,7 +120,6 @@ const Footer = () => {
             <span>Created by Sandya Pradayan</span>
           </Text>
         </div>
-
       </div>
     </footer>
   )

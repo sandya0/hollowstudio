@@ -77,7 +77,7 @@ export default function Hero() {
     updateProgress()
 
     return () => cancelAnimationFrame(animationFrameId)
-  }, []) // Removed webglReady from dependencies
+  }, []) // Rerun logic when webglReady changes
 
 
   // 2. The Hero Entrance Animation
@@ -111,7 +111,7 @@ export default function Hero() {
       </div>
 
                   <h1 className="sr-only">HOLLO STUDIO - Web Design Agency</h1>
-      {/* Layer 1 is removed */}
+      {/* Layer 1: Background Animation (FluidAnimation removed) */}
 
       {/* Layer 2: Hero Text */}
       <div className="absolute inset-0 z-10 mix-blend-screen pointer-events-none select-none">

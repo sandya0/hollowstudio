@@ -105,7 +105,7 @@ const Services = () => {
       </div>
 
       {/* Services Grid */}
-      <div ref={gridRef} className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-x-12 gap-y-16">
+      <div ref={gridRef} className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-x-9 gap-y-16">
         
         {servicesData.map((service, index) => (
           <div key={index} className="flex flex-col gap-6">

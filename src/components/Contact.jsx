@@ -55,36 +55,50 @@ const Contact = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full min-h-screen bg-brand-black text-brand-white overflow-hidden flex flex-col justify-center"
+      className="relative w-full min-h-screen bg-brand-black text-brand-white overflow-hidden flex flex-col justify-center py-10 md:py-0"
+      style={{
+        paddingLeft: 'var(--spacing-margin)',
+        paddingRight: 'var(--spacing-margin)'
+      }}
     >
-
-      {/* Main Container with 36px side margins */}
-      <div className="relative z-10 w-full px-4 sm:px-6 md:px-[36px]">
+      {/* Main Container */}
+      <div className="relative z-10 w-full flex flex-col gap-8 md:gap-4">
         
         {/* ROW 1: Headline and Buttons */}
-        <div className="flex flex-col md:flex-row items-center md:items-end w-full gap-6 md:gap-[36px]">
+        <div 
+          className="w-full flex flex-col items-center md:grid md:grid-cols-12 md:items-end"
+          style={{
+            columnGap: 'var(--spacing-gutter)'
+          }}
+        >
           
-          {/* LEFT BLOCK (Main Headline) */}
-                              <div className="contact-reveal flex-1 w-full flex flex-col items-center md:items-end text-center md:text-right">
-                                <Text>
-                                  <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-[6rem] font-headline uppercase tracking-leading-[0.9] leading-none">
-                                    MAKE AN IMPACT.
-                                  </h2>
-                                </Text>
-                              </div>
-          {/* RIGHT BLOCK (Buttons) */}
-          <div className="contact-reveal flex-1 w-full flex flex-col items-center md:items-start text-center md:text-left pb-1 md:pb-3">
-            <div className="flex justify-center md:justify-start gap-3">
+          {/* LEFT BLOCK (Main Headline) - Spans 6 columns */}
+          <div className="contact-reveal w-full md:col-span-6 flex flex-col items-center md:items-end text-center md:text-right mb-6 md:mb-0">
+            <Text>
+              <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-[6rem] font-headline uppercase leading-[0.9] break-words max-w-full">
+                MAKE AN IMPACT.
+              </h2>
+            </Text>
+          </div>
+
+          {/* RIGHT BLOCK (Buttons Wrapper) - Spans remaining 6 columns */}
+          {/* CHANGE 1: flex-col -> flex-row, added justify-center for mobile centering */}
+          <div className="w-full md:col-span-6 flex flex-row items-center md:items-end justify-center md:justify-start gap-4 mb-3 md:mb-0">
+            
+            {/* Button 1 */}
+            {/* CHANGE 2: w-full -> w-auto */}
+            <div className="contact-reveal w-auto">
               <button 
                 onClick={() => handleTabChange('project')}
-                className={`group flex items-center gap-1.5 px-4 py-2.5 md:px-8 md:py-4 rounded-full transition-all duration-300 ${
+                // CHANGE 3: w-full -> w-auto
+                className={`w-auto group flex justify-center md:justify-start items-center gap-1.5 px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 ${
                   activeTab === 'project' 
                     ? 'bg-brand-red text-brand-black hover:bg-white' 
                     : 'bg-transparent border border-brand-grey/30 text-brand-grey hover:border-brand-white hover:text-brand-white'
                 }`}
               >
                 <AnimatedButtonText>
-                  <span className="uppercase font-bold tracking-wide text-sm md:text-lg lg:text-xl">Start a Project</span>
+                  <span className="uppercase font-bold tracking-wide text-sm md:text-lg lg:text-xl whitespace-nowrap">Start a Project</span>
                 </AnimatedButtonText>
                 <svg 
                   width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
@@ -95,10 +109,15 @@ const Contact = () => {
                   <path d="M17 7v10h-10" />
                 </svg>
               </button>
+            </div>
 
+            {/* Button 2 */}
+            {/* CHANGE 2: w-full -> w-auto */}
+            <div className="contact-reveal w-auto">
               <button 
                 onClick={() => handleTabChange('follow')}
-                className={`group flex items-center gap-1.5 px-4 py-2.5 md:px-8 md:py-4 rounded-full transition-all duration-300 ${
+                // CHANGE 3: w-full -> w-auto
+                className={`w-auto group flex justify-center md:justify-start items-center gap-1.5 px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 ${
                   activeTab === 'follow' 
                     ? 'bg-brand-white text-brand-black' 
                     : 'bg-transparent border border-brand-grey/30 text-brand-grey hover:border-brand-white hover:text-brand-white'
@@ -117,48 +136,51 @@ const Contact = () => {
                 </svg>
               </button>
             </div>
+            
           </div>
         </div>
 
         {/* ROW 2: Sub-text and Dynamic Content */}
-        {/* We use items-start to align tops */}
-        <div className="flex flex-col md:flex-row items-start w-full gap-[36px] mt-4">
-          
+        <div 
+          className="w-full flex flex-col items-center md:grid md:grid-cols-12 md:items-start"
+          style={{
+            columnGap: 'var(--spacing-gutter)'
+          }}
+        >
           {/* LEFT BLOCK (Sub-text) */}
-          <div className="contact-reveal flex-1 w-full flex flex-col items-center md:items-end text-center md:text-right">
+          <div className="contact-reveal w-full md:col-span-6 flex flex-col items-center md:items-end text-center md:text-right mb-6 md:mb-0">
             <Text>
-              <p className="text-brand-white text-sm md:text-base uppercase tracking-widest pl-1 mt-1">
+              <p className="text-brand-white text-sm md:text-base uppercase tracking-widest mt-1">
                 Let's build something remarkable.
               </p>
             </Text>
           </div>
 
           {/* RIGHT BLOCK (Dynamic Content) */}
-          <div className="contact-reveal flex-1 w-full flex flex-col items-center md:items-start text-center md:text-left">
-            <div ref={contentRef} className="min-h-[60px] pl-2 mt-1">
+          <div className="contact-reveal w-full md:col-span-6 flex flex-col items-center md:items-start text-center md:text-left">
+            <div ref={contentRef} className="min-h-[60px] mt-1">
               {activeTab === 'project' ? (
-                <div className="flex flex-col gap-1 items-center md:items-start">
+                <div className="flex flex-col gap-1 items-center md:items-start w-full">
                   <Link 
                     href="mailto:dhimassandya@gmail.com" 
-                    // Added leading-none to remove top whitespace from the larger font
-                    className="text-xl md:text-2xl font-medium hover:text-brand-red transition-colors leading-none"
+                    className="text-xl md:text-2xl font-medium hover:text-brand-red transition-colors leading-none break-all sm:break-normal"
                   >
                     dhimassandya@gmail.com
                   </Link>
                 </div>
               ) : (
-                <div className="flex flex-col gap-1 items-center md:items-start">
-                    {/* Added leading-none */}
-                    <div className="flex gap-6 text-xl md:text-2xl font-medium leading-none">
-                      <Link href="https://www.instagram.com/hollostudioco" className="hover:text-brand-red transition-colors">Instagram</Link>
-                      <Link href="#" className="hover:text-brand-red transition-colors">LinkedIn</Link>
-                      <Link href="#" className="hover:text-brand-red transition-colors">Twitter</Link>
-                    </div>
+                <div className="flex flex-col gap-1 items-center md:items-start w-full">
+                  <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 text-xl md:text-2xl font-medium leading-none">
+                    <Link href="https://www.instagram.com/hollostudioco" className="hover:text-brand-red transition-colors">Instagram</Link>
+                    <Link href="#" className="hover:text-brand-red transition-colors">LinkedIn</Link>
+                    <Link href="#" className="hover:text-brand-red transition-colors">Twitter</Link>
+                  </div>
                 </div>
               )}
             </div>
           </div>
         </div>
+
       </div>
     </section>
   )
