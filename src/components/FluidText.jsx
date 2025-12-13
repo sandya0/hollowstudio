@@ -363,8 +363,8 @@ export default function FluidText({ text = "FLUID" }) {
     let outputColor, velocity, divergence, pressure;
 
     function initFBOs() {
-      const simW = Math.max(2, Math.ceil(window.innerWidth / 2));
-      const simH = Math.max(2, Math.ceil(window.innerHeight / 2));
+      const simW = Math.max(2, Math.ceil(window.innerWidth));
+      const simH = Math.max(2, Math.ceil(window.innerHeight));
 
       outputColor = createDoubleFBO(simW, simH);
       velocity = createDoubleFBO(simW, simH);
