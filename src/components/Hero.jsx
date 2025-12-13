@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import imagesLoaded from 'imagesloaded'
 import FluidText from './FluidText'
 import Text from './template/Text'
+import FluidAnimation from './FluidAnimation'
 
 export default function Hero() {
   const containerRef = useRef(null)
@@ -101,6 +102,7 @@ export default function Hero() {
       <div 
         ref={loaderRef}
         className="fixed inset-0 z-50 flex justify-center items-center bg-[#131417] text-white"
+      
       >
         <span 
           ref={percentRef} 
@@ -112,7 +114,7 @@ export default function Hero() {
 
                   <h1 className="sr-only">HOLLO STUDIO - Web Design Agency</h1>
       {/* Layer 1: Background Animation (FluidAnimation removed) */}
-
+      
       {/* Layer 2: Hero Text */}
       <div className="absolute inset-0 z-10 mix-blend-screen pointer-events-none select-none">
                     <FluidText text="HOLLO STUDIO" />      </div>

@@ -67,10 +67,10 @@ const Footer = () => {
               <h3 className="text-xs uppercase tracking-widest text-brand-grey font-medium mb-4">Menu</h3>
             </Text>
             <nav className="flex flex-col gap-3 md:gap-4">
-              {['Index', 'Projects', 'Contact'].map((item) => (
+              {['Homepage', 'Projects', 'Contact'].map((item) => (
                 <Link 
                   key={item} 
-                  href={item === 'Index' ? '/' : `/${item.toLowerCase()}`}
+                  href={item === 'Homepage' ? '/' : `/${item.toLowerCase()}`}
                   className="text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide hover:text-brand-red transition-colors"
                 >
                   {item}
