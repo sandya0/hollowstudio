@@ -118,7 +118,7 @@ const Works = () => {
       // 1. Removed inline style={{ paddingLeft: ... }}
       // 2. Added 'px-4' for Mobile (small gap)
       // 3. Added 'md:px-[var(--spacing-margin)]' for Desktop (custom large gap)
-      className="flex flex-col min-h-screen bg-brand-black text-white relative px-4 md:px-[var(--spacing-margin)]"
+      className="flex flex-col min-h-screen bg-brand-black text-white relative px-4 sm:px-6 md:px-12"
     >
       <div className="flex flex-col md:flex-row justify-between items-center md:items-end py-12">
         <div className="mb-4 md:mb-0 w-full md:w-auto text-left">

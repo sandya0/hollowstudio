@@ -55,11 +55,7 @@ const Contact = () => {
   return (
     <section 
       ref={containerRef}
-      className="relative w-full min-h-screen bg-brand-black text-brand-white overflow-hidden flex flex-col justify-center py-10 md:py-0"
-      style={{
-        paddingLeft: 'var(--spacing-margin)',
-        paddingRight: 'var(--spacing-margin)'
-      }}
+      className="relative w-full min-h-screen bg-brand-black text-brand-white overflow-hidden flex flex-col justify-center py-10 md:py-0 px-4 sm:px-6 md:px-12"
     >
       {/* Main Container */}
       <div className="relative z-10 w-full flex flex-col gap-8 md:gap-4">
@@ -171,9 +167,9 @@ const Contact = () => {
               ) : (
                 <div className="flex flex-col gap-1 items-center md:items-start w-full">
                   <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 text-xl md:text-2xl font-medium leading-none">
-                    <Link href="https://www.instagram.com/hollostudioco" className="hover:text-brand-red transition-colors">Instagram</Link>
-                    <Link href="#" className="hover:text-brand-red transition-colors">LinkedIn</Link>
-                    <Link href="#" className="hover:text-brand-red transition-colors">Twitter</Link>
+                    <Link href="https://www.instagram.com/hollowebstudio" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">Instagram</Link>
+                    <Link href="#" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">LinkedIn</Link>
+                    <Link href="#" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">Twitter</Link>
                   </div>
                 </div>
               )}

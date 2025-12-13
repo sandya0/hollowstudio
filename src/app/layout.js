@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
     logo: 'https://hollo.studio/logo.png',
     description: 'Digital design and development studio.',
     sameAs: [
-      'https://www.instagram.com/hollostudioco',
+      'https://www.instagram.com/hollowebstudio',
       'https://www.linkedin.com/company/hollostudio',
     ],
     image: 'https://hollo.studio/og-image.jpg',

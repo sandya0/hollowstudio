@@ -34,11 +34,7 @@ const Footer = () => {
   return (
     <footer 
       ref={footerRef}
-      className="relative w-full min-h-[50vh] bg-brand-black text-brand-white pt-16 md:pt-24 pb-8 md:pb-12 overflow-hidden"
-      style={{
-        paddingLeft: 'var(--spacing-margin)',
-        paddingRight: 'var(--spacing-margin)'
-      }}
+      className="relative w-full min-h-[50vh] bg-brand-black text-brand-white pt-16 md:pt-24 pb-8 md:pb-12 overflow-hidden px-4 sm:px-6 md:px-12"
     >
       {/* Main Top Content - Using custom grid system */}
       <div 
@@ -92,7 +88,7 @@ const Footer = () => {
               {['Instagram', 'LinkedIn', 'TikTok'].map((social) => (
                 <Link 
                   key={social} 
-                  href={social === 'Instagram' ? 'https://www.instagram.com/hollostudioco' : '#'}
+                  href={social === 'Instagram' ? 'https://www.instagram.com/hollowebstudio' : '#'}
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide hover:text-brand-red transition-colors"

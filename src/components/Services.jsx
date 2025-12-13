@@ -88,7 +88,7 @@ const Services = () => {
   return (
     <section 
       ref={containerRef} 
-      className="relative min-h-screen w-full bg-brand-black text-brand-white px-6 md:px-12 py-24 flex flex-col justify-between"
+      className="relative min-h-screen w-full bg-brand-black text-brand-white px-4 sm:px-6 md:px-12 py-24 flex flex-col justify-between"
     >
 
 

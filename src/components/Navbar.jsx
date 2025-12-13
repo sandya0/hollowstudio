@@ -134,14 +134,14 @@ const Navbar = () => {
   }
 
   const navLinks = [
-    { name: 'Index', href: '/' },
+    { name: 'Homepage', href: '/' },
     { name: 'Projects', href: '/projects' },
     { name: 'Contact', href: '/contact' }
   ]
 
   return (
     <div ref={containerRef}>
-      <nav className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-6 md:py-9 text-brand-white pointer-events-none">
+      <nav className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-12 py-6 md:py-9 text-brand-white pointer-events-none">
         
         <div className="nav-brand-wrapper z-50 absolute left-6 md:left-12 top-6 md:top-9 pointer-events-auto">
           <a href="/" aria-label="Home" className="cursor-pointer hover:text-brand-red transition-colors duration-300 block">
@@ -265,7 +265,9 @@ const Navbar = () => {
             {['Instagram', 'Twitter', 'LinkedIn'].map(social => (
               <Link 
                 key={social} 
-                href={social === 'Instagram' ? 'https://www.instagram.com/hollostudioco' : '#'}
+                href={social === 'Instagram' ? 'https://www.instagram.com/hollowebstudio' : '#'}
+                target="_blank" 
+                rel="noopener noreferrer"
                 className="text-sm text-brand-white uppercase tracking-widest hover:text-brand-red transition-colors duration-300"
               >
                 [{social}]
