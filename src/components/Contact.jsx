@@ -71,7 +71,7 @@ const Contact = () => {
           {/* LEFT BLOCK (Main Headline) - Spans 6 columns */}
           <div className="contact-reveal w-full md:col-span-6 flex flex-col items-center md:items-end text-center md:text-right mb-6 md:mb-0">
             <Text>
-              <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-[6rem] font-headline uppercase leading-[0.9] break-words max-w-full">
+              <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-[4rem] xl:text-[5rem] 2xl:text-[6rem] font-headline uppercase leading-[0.9] break-words max-w-full">
                 MAKE AN IMPACT.
               </h2>
             </Text>
@@ -79,7 +79,7 @@ const Contact = () => {
 
           {/* RIGHT BLOCK (Buttons Wrapper) - Spans remaining 6 columns */}
           {/* CHANGE 1: flex-col -> flex-row, added justify-center for mobile centering */}
-          <div className="w-full md:col-span-6 flex flex-row items-center md:items-end justify-center md:justify-start gap-4 mb-3 md:mb-0">
+          <div className="w-full md:col-span-6 flex flex-row md:flex-wrap lg:flex-nowrap items-center md:items-end justify-center md:justify-start gap-4 mb-3 md:mb-0">
             
             {/* Button 1 */}
             {/* CHANGE 2: w-full -> w-auto */}
@@ -87,14 +87,14 @@ const Contact = () => {
               <button 
                 onClick={() => handleTabChange('project')}
                 // CHANGE 3: w-full -> w-auto
-                className={`w-auto group flex justify-center md:justify-start items-center gap-1.5 px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 ${
+                className={`w-auto group flex justify-center md:justify-start items-center gap-1.5 px-5 py-2 md:px-8 md:py-4 rounded-full transition-all duration-300 ${
                   activeTab === 'project' 
                     ? 'bg-brand-red text-brand-black hover:bg-white' 
                     : 'bg-transparent border border-brand-grey/30 text-brand-grey hover:border-brand-white hover:text-brand-white'
                 }`}
               >
                 <AnimatedButtonText>
-                  <span className="uppercase font-bold tracking-wide text-sm md:text-lg lg:text-xl whitespace-nowrap">Start a Project</span>
+                  <span className="uppercase font-bold tracking-wide text-xs md:text-lg lg:text-xl whitespace-nowrap">Start a Project</span>
                 </AnimatedButtonText>
                 <svg 
                   width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
@@ -113,14 +113,14 @@ const Contact = () => {
               <button 
                 onClick={() => handleTabChange('follow')}
                 // CHANGE 3: w-full -> w-auto
-                className={`w-auto group flex justify-center md:justify-start items-center gap-1.5 px-6 py-3 md:px-8 md:py-4 rounded-full transition-all duration-300 ${
+                className={`w-auto group flex justify-center md:justify-start items-center gap-1.5 px-5 py-2 md:px-8 md:py-4 rounded-full transition-all duration-300 ${
                   activeTab === 'follow' 
                     ? 'bg-brand-white text-brand-black' 
                     : 'bg-transparent border border-brand-grey/30 text-brand-grey hover:border-brand-white hover:text-brand-white'
                 }`}
               >
                 <AnimatedButtonText>
-                  <span className="uppercase font-bold tracking-wide text-sm md:text-lg lg:text-xl">Follow</span>
+                  <span className="uppercase font-bold tracking-wide text-xs md:text-lg lg:text-xl">Follow</span>
                 </AnimatedButtonText>
                 <svg 
                   width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
