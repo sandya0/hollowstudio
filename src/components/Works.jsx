@@ -118,9 +118,9 @@ const Works = () => {
       // 1. Removed inline style={{ paddingLeft: ... }}
       // 2. Added 'px-4' for Mobile (small gap)
       // 3. Added 'md:px-[var(--spacing-margin)]' for Desktop (custom large gap)
-      className="flex flex-col min-h-screen bg-brand-black text-white relative px-4 sm:px-6 md:px-12"
+      className="flex flex-col min-h-50vh bg-brand-black text-white relative"
     >
-      <div className="flex flex-col md:flex-row justify-between items-center md:items-end py-12">
+      <div className="flex flex-col md:flex-row justify-between items-center md:items-end py-12 px-4 sm:px-6 md:px-12">
         <div className="mb-4 md:mb-0 w-full md:w-auto text-left">
           <h2 className="text-4xl md:text-5xl font-headline uppercase text-white">Projects</h2>
         </div>
@@ -173,7 +173,7 @@ const Works = () => {
               className="absolute top-0 left-0 w-full h-0 bg-brand-red -z-10"
             />
             
-            <div className="relative z-10 pt-8 pb-2 md:pt-14 md:pb-3 grid grid-cols-12 gap-x-4 items-end">
+            <div className="relative z-10 pt-8 pb-2 md:pt-14 md:pb-3 grid grid-cols-12 gap-x-4 items-end px-4 sm:px-6 md:px-12">
               <div className="col-span-8">
                 <h2 className="text-4xl md:text-6xl font-headline uppercase leading-none tracking-tight group-hover:text-white transition-colors duration-300">
                   {project.name}
