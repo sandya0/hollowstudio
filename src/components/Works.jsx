@@ -14,19 +14,27 @@ const Works = () => {
   const projects = [
     {
       id: 1,
-      name: "Project One",
-      type: "Web Design",
-      link: "#",
-      image: "https://placehold.co/600x400/1a1a1a/white?text=Project+One",
-      year: 2024,
+      name: "UESC",
+      type: "Web Development",
+      link: "https://uesc2.vercel.app/",
+      image: "images/uesc.png",
+      year: 2025,
     },
     {
       id: 2,
-      name: "Project Two",
-      type: "Web Development",
+      name: "Steric Spes",
+      type: "Architecture Project",
       link: "#",
-      image: "https://placehold.co/600x400/1a1a1a/white?text=Project+Two",
-      year: 2023,
+      image: "images/architecture.png", // Changed placeholder size to a 16:9 ratio for better preview
+      year: 2026,
+    },
+        {
+      id: 3,
+      name: "Portfolio",
+      type: "Self Branding",
+      link: "https://sandyaportfolio.vercel.app/",
+      image: "images/portfolio.png", // Changed placeholder size to a 16:9 ratio for better preview
+      year: 2025,
     },
   ];
 
@@ -112,13 +120,9 @@ const Works = () => {
 
   return (
     <section 
-      id="works" 
+      id="projects" 
       onMouseMove={handleMouseMove}
-      // UPDATED: 
-      // 1. Removed inline style={{ paddingLeft: ... }}
-      // 2. Added 'px-4' for Mobile (small gap)
-      // 3. Added 'md:px-[var(--spacing-margin)]' for Desktop (custom large gap)
-      className="flex flex-col min-h-50vh bg-brand-black text-white relative"
+      className="flex projects flex-col min-h-50vh bg-brand-black text-white relative"
     >
       <div className="flex flex-col md:flex-row justify-between items-center md:items-end py-12 px-4 sm:px-6 md:px-12">
         <div className="mb-4 md:mb-0 w-full md:w-auto text-left">
@@ -133,13 +137,15 @@ const Works = () => {
 
       <div
         ref={previewRef}
-        className="fixed top-0 left-0 w-[350px] h-[250px] z-50 pointer-events-none hidden md:block opacity-0"
+        // UPDATED: Replaced h-[250px] with aspect-video for a 16:9 ratio
+        className="fixed top-0 left-0 w-[350px] aspect-video z-50 pointer-events-none hidden md:block opacity-0"
       >
         {activeImage && (
             <img 
                 src={activeImage}
                 alt="preview"
-                className="w-full h-full object-cover rounded-lg border border-white/20 shadow-2xl"
+                // object-cover ensures the image fills the 16:9 box without stretching
+                className="w-full h-full object-cover rounded-lg border border-white/20 shadow-2xl" 
             />
         )}
       </div>
@@ -195,11 +201,11 @@ const Works = () => {
       </div>
 
       {/* --- MOBILE VIEW --- */}
-      <div id="mobile-works-list" className="flex md:hidden flex-col gap-6 pb-12 mt-4">
+      <div id="mobile-works-list" className="flex md:hidden flex-col gap-6 pb-12 mt-4 px-4 sm:px-6">
         {projects.map((project) => (
           <div 
             key={project.id} 
-            className="mobile-project-card flex flex-col gap-3"
+            className="mobile-project-card flex flex-col gap-3 "
             onClick={() => window.open(project.link, "_blank")}
           > 
             <div className="flex flex-col gap-1">
@@ -212,10 +218,13 @@ const Works = () => {
                  <p className="text-sm text-brand-grey">{project.year}</p>
               </div>
             </div>
-            <div className="relative w-full aspect-[4/3] overflow-hidden rounded-sm bg-gray-800">
+            
+            {/* UPDATED: Changed aspect-[4/3] to aspect-video (16:9 ratio) */}
+            <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-gray-800">
               <img 
                 src={project.image} 
                 alt={project.name} 
+                // object-cover ensures the image fills the 16:9 box without stretching
                 className="w-full h-full object-cover"
               />
             </div>

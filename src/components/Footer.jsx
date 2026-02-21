@@ -4,18 +4,32 @@ import Link from './template/Link'
 import Text from './template/Text'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin' // 1. Import ScrollTo
 
-// Register ScrollTrigger
+// Register Plugins
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 }
 
 const Footer = () => {
   const footerRef = useRef(null)
 
+  // 2. Smooth Scroll Handler
+  const handleScroll = (e, id) => {
+    e.preventDefault();
+    if (id === 'homepage') {
+      gsap.to(window, { duration: 1.5, scrollTo: 0, ease: "power4.inOut" });
+    } else {
+      gsap.to(window, { 
+        duration: 1.5, 
+        scrollTo: { y: `#${id}`, offsetY: 0 }, 
+        ease: "power4.inOut" 
+      });
+    }
+  };
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate footer elements staggering up
       gsap.from('.footer-item', {
         scrollTrigger: {
           trigger: footerRef.current,
@@ -36,19 +50,15 @@ const Footer = () => {
       ref={footerRef}
       className="relative w-full min-h-[50vh] bg-brand-black text-brand-white pt-16 md:pt-24 pb-8 md:pb-12 overflow-hidden px-4 sm:px-6 md:px-12"
     >
-      {/* Main Top Content - Using custom grid system */}
-      <div 
-        className="relative z-10 mb-20 md:mb-32 lg:mb-48 grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-0"
-        style={{
-          gap: '0 var(--spacing-gutter)'
-        }}
-      >
+      <div className="relative z-10 mb-20 md:mb-32 lg:mb-48 grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-y-0">
         
         {/* Left: Brand Logo */}
-        <div 
-          className="footer-item md:col-start-1 md:col-span-4"
-        >
-          <Link href="/" className="group block">
+        <div className="footer-item md:col-start-1 md:col-span-4">
+          <Link 
+            href="/" 
+            onClick={(e) => handleScroll(e, 'homepage')} 
+            className="group block"
+          >
             <Text>
               <div className="text-3xl sm:text-4xl md:text-6xl font-headline uppercase tracking-normal flex items-center gap-1">
                 Hollo Studio
@@ -58,10 +68,7 @@ const Footer = () => {
         </div>
 
         {/* Right: Navigation Columns */}
-        <div 
-          className="footer-item grid grid-cols-2 gap-8 md:col-start-7 md:col-span-6"
-        >
-          {/* Menu Column */}
+        <div className="footer-item grid grid-cols-2 gap-8 md:col-start-7 md:col-span-6">
           <div className="flex flex-col">
             <Text>
               <h3 className="text-xs uppercase tracking-widest text-brand-grey font-medium mb-4">Menu</h3>
@@ -70,7 +77,9 @@ const Footer = () => {
               {['Homepage', 'Projects', 'Contact'].map((item) => (
                 <Link 
                   key={item} 
-                  href={item === 'Homepage' ? '/' : `/${item.toLowerCase()}`}
+                  // 3. Updated Href to Anchors
+                  href={`#${item.toLowerCase()}`}
+                  onClick={(e) => handleScroll(e, item.toLowerCase())}
                   className="text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide hover:text-brand-red transition-colors"
                 >
                   {item}
@@ -102,19 +111,12 @@ const Footer = () => {
       </div>
 
       {/* Bottom Row */}
-      <div 
-        className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-3 md:gap-4 text-xs md:text-sm font-medium uppercase tracking-wide"
-      >
+      <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-3 md:gap-4 text-xs md:text-sm font-medium uppercase tracking-wide">
         <div className="footer-item text-brand-white/80">
-          <Text>
-            <span>2025 | Hollo Studio</span>
-          </Text>
+          <Text><span>2025 | Hollo Studio</span></Text>
         </div>
-
         <div className="footer-item text-brand-white/80">
-          <Text>
-            <span>Created by Sandya Pradayan</span>
-          </Text>
+          <Text><span>Created by Sandya Pradayan</span></Text>
         </div>
       </div>
     </footer>

@@ -54,6 +54,7 @@ const Contact = () => {
 
   return (
     <section 
+      id="contact"
       ref={containerRef}
       className="relative w-full min-h-screen bg-brand-black text-brand-white overflow-hidden flex flex-col justify-center py-10 md:py-0 px-4 sm:px-6 md:px-12"
     >

@@ -3,21 +3,47 @@ import React, { useLayoutEffect, useRef, useState } from 'react'
 import Link from './template/Link' 
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
-gsap.registerPlugin(ScrollTrigger);
+// Register GSAP Plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+}
 
 const Navbar = () => {
   const containerRef = useRef(null)
   const navOverlayRef = useRef(null)
-  const desktopLinksRef = useRef(null) // Kept the ref for safety, but we target children now
+  const desktopLinksRef = useRef(null) 
   const logoTextRef = useRef(null);
   const tl = useRef(null)
 
   const [isOpen, setIsOpen] = useState(false)
 
+  // --- SMOOTH SCROLL LOGIC ---
+  const handleScroll = (e, id) => {
+    e.preventDefault();
+    
+    // If we're on mobile/tablet and the menu is open, close it first
+    if (isOpen) {
+      toggleMenu();
+    }
+
+    // Determine target: 'homepage' goes to top (0), others go to #id
+    const target = id === 'homepage' ? 0 : `#${id}`;
+    
+    gsap.to(window, { 
+      duration: 1.5, 
+      scrollTo: {
+        y: target,
+        autoKill: true // Allows user to interrupt scroll by wheeling
+      }, 
+      ease: 'power4.inOut' 
+    });
+  };
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // --- NAV BRAND & OVERLAY SETUP ---
+      // --- INITIAL ANIMATIONS & SETTINGS ---
       gsap.from('.nav-brand-wrapper', {
         y: -20,
         opacity: 0,
@@ -35,15 +61,14 @@ const Navbar = () => {
       gsap.set('.overlay-link-wrapper', { x: 50, autoAlpha: 0 })
       gsap.set('.overlay-contact', { x: 20, autoAlpha: 0 })
 
-      // --- BURGER MENU INITIAL STATE ---
+      // Burger Menu Initial State
       gsap.set('.burger-line-top', { y: -5 }) 
       gsap.set('.burger-line-bottom', { y: 5 }) 
 
-      // --- TIMELINE SETUP ---
+      // --- OVERLAY TIMELINE ---
       tl.current = gsap.timeline({ paused: true })
 
       tl.current
-        // CHANGED: Instead of hiding the whole ref, we only hide items with this class
         .to('.desktop-nav-link', {
           autoAlpha: 0,
           duration: 0.3,
@@ -78,11 +103,12 @@ const Navbar = () => {
     return () => ctx.revert()
   }, [])
 
+  // --- LOGO VISIBILITY ON SCROLL ---
   useLayoutEffect(() => {
     if (typeof window === 'undefined') return;
     const heroSection = document.querySelector('#hero-section');
     if (heroSection) {
-      const tl = gsap.timeline({
+      const scrollTl = gsap.timeline({
         scrollTrigger: {
           trigger: heroSection,
           start: 'bottom top',
@@ -90,7 +116,7 @@ const Navbar = () => {
         },
       });
 
-      tl.to(logoTextRef.current, {
+      scrollTl.to(logoTextRef.current, {
         opacity: 1,
         duration: 0.5,
         ease: 'power2.out',
@@ -134,24 +160,30 @@ const Navbar = () => {
   }
 
   const navLinks = [
-    { name: 'Homepage', href: '/' },
-    { name: 'Projects', href: '/projects' },
-    { name: 'Contact', href: '/contact' }
+    { name: 'Homepage', id: 'homepage' },
+    { name: 'Projects', id: 'projects' },
+    { name: 'Contact', id: 'contact' }
   ]
 
   return (
     <div ref={containerRef}>
       <nav className="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 md:px-12 py-6 md:py-9 text-brand-white pointer-events-none">
         
+        {/* Brand Logo */}
         <div className="nav-brand-wrapper z-50 absolute left-6 md:left-12 top-6 md:top-9 pointer-events-auto">
-          <a href="/" aria-label="Home" className="cursor-pointer hover:text-brand-red transition-colors duration-300 block">
+          <a 
+            href="#homepage" 
+            onClick={(e) => handleScroll(e, 'homepage')} 
+            aria-label="Home" 
+            className="cursor-pointer hover:text-brand-red transition-colors duration-300 block"
+          >
             <span ref={logoTextRef} className="text-[20px] md:text-[28px] font-headline tracking-wider font-bold uppercase opacity-0">
               Hollo Studio
             </span>
           </a>
         </div>
 
-        {/* Desktop Links Container - Grid Overlay */}
+        {/* Desktop Links Container */}
         <div
           ref={desktopLinksRef}
           className="hidden md:block fixed top-6 md:top-9 left-0 right-0 z-40 pointer-events-none"
@@ -168,86 +200,64 @@ const Navbar = () => {
               alignItems: 'center'
             }}
           >
-            {/* Index - Column 9 */}
-            <div 
-              style={{ gridColumn: '9 / 10' }} 
-              className="desktop-nav-link pointer-events-auto" // Added class here
-            >
-              <Link href={navLinks[0].href} className="hover:text-brand-red transition-colors duration-300 block font-bold uppercase tracking-wide">
-                {navLinks[0].name}
-              </Link>
-            </div>
+            {/* Nav Mapping (Columns 9, 10, 11) */}
+            {navLinks.map((link, index) => (
+              <div 
+                key={link.id}
+                style={{ gridColumn: `${9 + index} / ${10 + index}` }} 
+                className="desktop-nav-link pointer-events-auto"
+              >
+                <Link 
+                  href={`#${link.id}`} 
+                  onClick={(e) => handleScroll(e, link.id)}
+                  className="hover:text-brand-red transition-colors duration-300 block font-bold uppercase tracking-wide"
+                >
+                  {link.name}
+                </Link>
+              </div>
+            ))}
 
-            {/* Projects - Column 10 */}
-            <div 
-              style={{ gridColumn: '10 / 11' }} 
-              className="desktop-nav-link pointer-events-auto" // Added class here
-            >
-              <Link href={navLinks[1].href} className="hover:text-brand-red transition-colors duration-300 block font-bold uppercase tracking-wide">
-                {navLinks[1].name}
-              </Link>
-            </div>
-
-            {/* Contact - Column 11 */}
-            <div 
-              style={{ gridColumn: '11 / 12' }} 
-              className="desktop-nav-link pointer-events-auto" // Added class here
-            >
-              <Link href={navLinks[2].href} className="hover:text-brand-red transition-colors duration-300 block font-bold uppercase tracking-wide">
-                {navLinks[2].name}
-              </Link>
-            </div>
-
-            {/* Burger Menu - Column 12 (BACK IN THE GRID) */}
+            {/* Desktop Burger - Column 12 */}
             <div 
               style={{ gridColumn: '12 / 13' }} 
               className="flex justify-end pointer-events-auto"
-              // Note: NO 'desktop-nav-link' class here, so GSAP won't hide it!
             >
               <button
                 onClick={toggleMenu}
                 className="relative w-8 h-8 cursor-pointer block group"
                 aria-label="Toggle Menu"
               >
-                <span 
-                  className="burger-line-top absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"
-                ></span>
-                <span 
-                  className="burger-line-bottom absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"
-                ></span>
+                <span className="burger-line-top absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"></span>
+                <span className="burger-line-bottom absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"></span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Burger Menu (Remains unchanged) */}
+        {/* Mobile Burger Menu */}
         <div className="md:hidden absolute right-6 top-6 z-50 pointer-events-auto">
           <button
             onClick={toggleMenu}
             className="relative w-8 h-8 cursor-pointer block group"
             aria-label="Toggle Menu"
           >
-            <span 
-              className="burger-line-top absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"
-            ></span>
-            <span 
-              className="burger-line-bottom absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"
-            ></span>
+            <span className="burger-line-top absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"></span>
+            <span className="burger-line-bottom absolute top-1/2 left-0 w-full h-[2px] bg-brand-white group-hover:bg-brand-red transition-colors duration-300 block -translate-y-1/2 transform-gpu"></span>
           </button>
         </div>
       </nav>
 
-      {/* OVERLAY */}
+      {/* NAV OVERLAY */}
       <div
         ref={navOverlayRef}
         className="fixed inset-0 z-40 bg-black flex flex-col justify-center px-10 md:w-1/2 md:left-1/2 md:border-l md:border-brand-white/10"
       >
         <div className="flex flex-col gap-6 mb-12">
           {navLinks.map(item => (
-            <div key={item.name} className="overlay-link-wrapper overflow-hidden">
+            <div key={item.id} className="overlay-link-wrapper overflow-hidden">
               <Link
-                href={item.href}
-                onClick={toggleMenu} 
+                href={`#${item.id}`}
+                onClick={(e) => handleScroll(e, item.id)} 
                 className="text-5xl md:text-6xl font-bold uppercase text-brand-white hover:text-brand-red transition-colors duration-300 tracking-tight block"
               >
                 {item.name}
