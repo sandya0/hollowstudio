@@ -17,15 +17,15 @@ const Works = () => {
       name: "UESC",
       type: "Web Development",
       link: "https://uesc2.vercel.app/",
-      image: "images/uesc.png",
+      image: "/images/uesc.png",
       year: 2025,
     },
     {
       id: 2,
       name: "Steric Spes",
       type: "Architecture Project",
-      link: "#",
-      image: "images/architecture.png", // Changed placeholder size to a 16:9 ratio for better preview
+      link: "https://stericspes.vercel.app/",
+      image: "/images/architecture.png", 
       year: 2026,
     },
         {
@@ -33,7 +33,7 @@ const Works = () => {
       name: "Portfolio",
       type: "Self Branding",
       link: "https://sandyaportfolio.vercel.app/",
-      image: "images/portfolio.png", // Changed placeholder size to a 16:9 ratio for better preview
+      image: "/images/portfolio.png",
       year: 2025,
     },
   ];
@@ -138,7 +138,7 @@ const Works = () => {
       <div
         ref={previewRef}
         // UPDATED: Replaced h-[250px] with aspect-video for a 16:9 ratio
-        className="fixed top-0 left-0 w-[350px] aspect-video z-50 pointer-events-none hidden md:block opacity-0"
+        className="fixed top-0 left-0 w-[700px] aspect-video z-50 pointer-events-none hidden md:block opacity-0"
       >
         {activeImage && (
             <img 
