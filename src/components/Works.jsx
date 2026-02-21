@@ -17,7 +17,7 @@ const Works = () => {
       name: "UESC",
       type: "Web Development",
       link: "https://uesc2.vercel.app/",
-      image: "/images/uesc.png",
+      image: "/images/UESC.png",
       year: 2025,
     },
     {
@@ -33,7 +33,7 @@ const Works = () => {
       name: "Portfolio",
       type: "Self Branding",
       link: "https://sandyaportfolio.vercel.app/",
-      image: "/images/portfolio.png",
+      image: "/images/Portfolio.png",
       year: 2025,
     },
   ];
