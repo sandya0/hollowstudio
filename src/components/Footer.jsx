@@ -113,7 +113,7 @@ const Footer = () => {
       {/* Bottom Row */}
       <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-3 md:gap-4 text-xs md:text-sm font-medium uppercase tracking-wide">
         <div className="footer-item text-brand-white/80">
-          <Text><span>2025 | Hollo Studio</span></Text>
+          <Text><span>2026 | Hollo Studio</span></Text>
         </div>
         <div className="footer-item text-brand-white/80">
           <Text><span>Created by Sandya Pradayan</span></Text>
