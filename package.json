@@ -1,5 +1,5 @@
 {
-  "name": "hollowstudio",
+  "name": "hollostudio",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -24,8 +24,8 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.0.7",
+    "eslint": "^10.0.2",
+    "eslint-config-next": "^0.2.4",
     "tailwindcss": "^4"
   }
 }
