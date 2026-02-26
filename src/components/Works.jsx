@@ -1,11 +1,12 @@
 'use client'
 import React, { useRef, useState } from "react";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Icon } from "@iconify/react";
 
 const Works = () => {
-  const [activeImage, setActiveImage] = useState(null);
+  const [activeProject, setActiveProject] = useState(null);
   const overlayRefs = useRef([]);
   const previewRef = useRef(null);
   const moveX = useRef(null);
@@ -28,7 +29,7 @@ const Works = () => {
       image: "/images/architecture.png", 
       year: 2026,
     },
-        {
+    {
       id: 3,
       name: "Portfolio",
       type: "Self Branding",
@@ -82,8 +83,8 @@ const Works = () => {
     }
   };
 
-  const handleMouseEnter = (index, projectImage) => {
-    setActiveImage(projectImage);
+  const handleMouseEnter = (index, project) => {
+    setActiveProject(project);
 
     const el = overlayRefs.current[index];
     if (el) {
@@ -130,22 +131,22 @@ const Works = () => {
         </div>
         <div className="max-w-md text-left md:text-right w-full md:w-auto">
           <p className="text-lg md:text-xl text-white/80">
-            We help modern brands show up with clarity, presence, and purposeful digital design.
+            We help modern brands show up with clarity, presence, and purposeful web design.
           </p>
         </div>
       </div>
 
       <div
         ref={previewRef}
-        // UPDATED: Replaced h-[250px] with aspect-video for a 16:9 ratio
         className="fixed top-0 left-0 w-[700px] aspect-video z-50 pointer-events-none hidden md:block opacity-0"
       >
-        {activeImage && (
-            <img 
-                src={activeImage}
-                alt="preview"
-                // object-cover ensures the image fills the 16:9 box without stretching
-                className="w-full h-full object-cover rounded-lg border border-white/20 shadow-2xl" 
+        {activeProject && (
+            <Image 
+                src={activeProject.image}
+                alt={`${activeProject.name} - ${activeProject.type}`}
+                fill
+                className="object-cover rounded-lg border border-white/20 shadow-2xl" 
+                sizes="700px"
             />
         )}
       </div>
@@ -170,7 +171,7 @@ const Works = () => {
           <div
             key={project.id}
             className="project-item relative group w-full border-b border-brand-grey/30 cursor-pointer overflow-hidden"
-            onMouseEnter={() => handleMouseEnter(index, project.image)}
+            onMouseEnter={() => handleMouseEnter(index, project)}
             onMouseLeave={() => handleMouseLeave(index)}
             onClick={() => window.open(project.link, "_blank")}
           >
@@ -219,13 +220,13 @@ const Works = () => {
               </div>
             </div>
             
-            {/* UPDATED: Changed aspect-[4/3] to aspect-video (16:9 ratio) */}
             <div className="relative w-full aspect-video overflow-hidden rounded-sm bg-gray-800">
-              <img 
+              <Image 
                 src={project.image} 
-                alt={project.name} 
-                // object-cover ensures the image fills the 16:9 box without stretching
-                className="w-full h-full object-cover"
+                alt={`${project.name} - ${project.type}`} 
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
             <div className="w-full h-[1px] bg-brand-grey/20 mt-1"></div>

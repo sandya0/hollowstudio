@@ -128,7 +128,7 @@ export default function Hero() {
           <div className="max-w-full lg:max-w-[700px]">
             <Text>
               <p className="font-body text-lg sm:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl leading-tight text-brand-white uppercase">
-                We are a web studio that crafts digital experiences that <span className="text-brand-red font-semibold">make an impact</span> for brands that want to <span className="text-brand-red font-semibold">stand out</span>,
+                We are a web studio that crafts web experiences that <span className="text-brand-red font-semibold">make an impact</span> for brands that want to <span className="text-brand-red font-semibold">stand out</span>,
                 not blend in.
               </p>
             </Text>

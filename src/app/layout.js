@@ -1,11 +1,16 @@
 import "./globals.css";
 
 export const metadata = {
-  description: "Hollo Studio is a digital design and development studio based in Gading Serpong, crafting impactful, performance-focused web experiences for brands in Jakarta and worldwide.",
-  keywords: ["web design jakarta", "web developer gading serpong", "digital agency tangerang", "web development", "Hollo Studio", "design studio", "creative agency indonesia"],
+  metadataBase: new URL('https://hollostudio.site'),
+  title: "Hollo Studio | Web Design and Development",
+  description: "Hollo Studio is a web design and development studio based in Gading Serpong, crafting impactful, performance-focused web experiences for brands in Jakarta and worldwide.",
+  keywords: ["web design jakarta", "web developer gading serpong", "web agency tangerang", "web development", "Hollo Studio", "design studio", "creative agency indonesia"],
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: "Hollo Studio | Digital Design and Development",
-    description: "Hollo Studio is a digital design and development studio based in Gading Serpong, crafting impactful, performance-focused web experiences for brands in Jakarta and worldwide.",
+    title: "Hollo Studio | Web Design and Development",
+    description: "Hollo Studio is a web design and development studio based in Gading Serpong, crafting impactful, performance-focused web experiences for brands in Jakarta and worldwide.",
     url: "https://hollostudio.site",
     siteName: "Hollo Studio",
     images: [
@@ -19,6 +24,12 @@ export const metadata = {
     locale: "en_US",
     type: "website",
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hollo Studio | Web Design and Development',
+    description: 'Hollo Studio is a web design and development studio based in Gading Serpong, crafting impactful, performance-focused web experiences for brands in Jakarta and worldwide.',
+    images: ['https://hollostudio.site/hollostudio.png'],
+  }
 };
 
 export default function RootLayout({ children }) {
@@ -28,7 +39,7 @@ export default function RootLayout({ children }) {
     name: 'Hollo Studio',
     url: 'https://hollostudio.site',
     logo: 'https://hollostudio.site/logo.png',
-    description: 'Digital design and development studio crafting impactful web experiences.',
+    description: 'Web design and development studio crafting impactful web experiences.',
     sameAs: [
       'https://www.instagram.com/hollowebstudio',
       'https://www.linkedin.com/in/sandya-pradayan-baa04b213/',
