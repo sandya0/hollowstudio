@@ -275,7 +275,11 @@ const Navbar = () => {
             {['Instagram', 'Twitter', 'LinkedIn'].map(social => (
               <Link 
                 key={social} 
-                href={social === 'Instagram' ? 'https://www.instagram.com/hollowebstudio' : '#'}
+                href={
+                  social === 'Instagram' ? 'https://www.instagram.com/hollowebstudio' :
+                  social === 'LinkedIn' ? 'https://www.linkedin.com/in/sandya-pradayan-baa04b213/' :
+                  'https://x.com/sandyaporto'
+                }
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-sm text-brand-white uppercase tracking-widest hover:text-brand-red transition-colors duration-300"

@@ -65,6 +65,16 @@ const Footer = () => {
               </div>
             </Text>
           </Link>
+
+          <div className="mt-6 md:mt-8">
+            <Text>
+               <p className="text-sm md:text-sm lg:text-base  max-w-sm uppercase tracking-wide leading-relaxed">
+                 Based in Gading Serpong.<br/>
+                 Serving clients across Jakarta<br/>
+                 and worldwide.
+               </p>
+            </Text>
+          </div>
         </div>
 
         {/* Right: Navigation Columns */}
@@ -97,7 +107,11 @@ const Footer = () => {
               {['Instagram', 'LinkedIn', 'TikTok'].map((social) => (
                 <Link 
                   key={social} 
-                  href={social === 'Instagram' ? 'https://www.instagram.com/hollowebstudio' : '#'}
+                  href={
+                  social === 'Instagram' ? 'https://www.instagram.com/hollowebstudio' :
+                    social === 'LinkedIn' ? 'https://www.linkedin.com/in/sandya-pradayan-baa04b213/' :
+                    'https://x.com/sandyaporto'
+                  }
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-base md:text-lg lg:text-xl font-bold uppercase tracking-wide hover:text-brand-red transition-colors"

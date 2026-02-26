@@ -169,8 +169,8 @@ const Contact = () => {
                 <div className="flex flex-col gap-1 items-center md:items-start w-full">
                   <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 text-xl md:text-2xl font-medium leading-none">
                     <Link href="https://www.instagram.com/hollowebstudio" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">Instagram</Link>
-                    <Link href="#" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">LinkedIn</Link>
-                    <Link href="#" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">Twitter</Link>
+                    <Link href="https://www.linkedin.com/in/sandya-pradayan-baa04b213/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">LinkedIn</Link>
+                    <Link href="https://x.com/sandyaporto" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors">X</Link>
                   </div>
                 </div>
               )}
