@@ -1,9 +1,23 @@
 export default function robots() {
   return {
-    rules: {
-      userAgent: '*',
-      allow: '/',
-    },
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+      },
+      {
+        userAgent: [
+          'GPTBot',      // ChatGPT
+          'ChatGPT-User', 
+          'CCBot',      
+          'Google-Extended', 
+          'FacebookBot', 
+          'Omgilibot',
+          'anthropic-ai'
+        ],
+        disallow: '/',
+      },
+    ],
     sitemap: 'https://hollostudio.site/sitemap.xml',
-  }
+  };
 }
