@@ -20,25 +20,22 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   // --- SMOOTH SCROLL LOGIC ---
-  const handleScroll = (e, id) => {
+const handleScroll = (e, id) => {
     e.preventDefault();
     
-    // If we're on mobile/tablet and the menu is open, close it first
-    if (isOpen) {
+    // If you are in Navbar.jsx and the mobile menu is open, close it
+    if (typeof toggleMenu === 'function' && isOpen) {
       toggleMenu();
     }
 
-    // Determine target: 'homepage' goes to top (0), others go to #id
-    const target = id === 'homepage' ? 0 : `#${id}`;
-    
-    gsap.to(window, { 
-      duration: 1.5, 
-      scrollTo: {
-        y: target,
-        autoKill: true // Allows user to interrupt scroll by wheeling
-      }, 
-      ease: 'power4.inOut' 
-    });
+    // Use the global Lenis instance we exposed in SmoothScroll.jsx
+    if (window.lenis) {
+      if (id === 'homepage') {
+        window.lenis.scrollTo(0, { duration: 1.5, easing: (t) => 1 - Math.pow(1 - t, 4) });
+      } else {
+        window.lenis.scrollTo(`#${id}`, { duration: 1.5, offset: 0, easing: (t) => 1 - Math.pow(1 - t, 4) });
+      }
+    }
   };
 
   useLayoutEffect(() => {

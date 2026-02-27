@@ -1,4 +1,5 @@
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata = {
   metadataBase: new URL('https://hollostudio.site'),
@@ -69,13 +70,15 @@ export default function RootLayout({ children }) {
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <SmoothScroll>
         {children}
+        </SmoothScroll>
       </body>
     </html>
   );

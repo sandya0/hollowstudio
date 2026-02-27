@@ -15,16 +15,21 @@ const Footer = () => {
   const footerRef = useRef(null)
 
   // 2. Smooth Scroll Handler
-  const handleScroll = (e, id) => {
+const handleScroll = (e, id) => {
     e.preventDefault();
-    if (id === 'homepage') {
-      gsap.to(window, { duration: 1.5, scrollTo: 0, ease: "power4.inOut" });
-    } else {
-      gsap.to(window, { 
-        duration: 1.5, 
-        scrollTo: { y: `#${id}`, offsetY: 0 }, 
-        ease: "power4.inOut" 
-      });
+    
+    // If you are in Navbar.jsx and the mobile menu is open, close it
+    if (typeof toggleMenu === 'function' && isOpen) {
+      toggleMenu();
+    }
+
+    // Use the global Lenis instance we exposed in SmoothScroll.jsx
+    if (window.lenis) {
+      if (id === 'homepage') {
+        window.lenis.scrollTo(0, { duration: 1.5, easing: (t) => 1 - Math.pow(1 - t, 4) });
+      } else {
+        window.lenis.scrollTo(`#${id}`, { duration: 1.5, offset: 0, easing: (t) => 1 - Math.pow(1 - t, 4) });
+      }
     }
   };
 

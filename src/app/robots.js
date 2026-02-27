@@ -7,7 +7,7 @@ export default function robots() {
       },
       {
         userAgent: [
-          'GPTBot',      // ChatGPT
+          'GPTBot',    
           'ChatGPT-User', 
           'CCBot',      
           'Google-Extended', 
