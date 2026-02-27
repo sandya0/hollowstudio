@@ -109,7 +109,7 @@ const handleScroll = (e, id) => {
               <h3 className="text-xs uppercase tracking-widest text-brand-grey font-medium mb-4">Socials</h3>
             </Text>
             <nav className="flex flex-col gap-3 md:gap-4">
-              {['Instagram', 'LinkedIn', 'TikTok'].map((social) => (
+              {['Instagram', 'LinkedIn', 'X'].map((social) => (
                 <Link 
                   key={social} 
                   href={

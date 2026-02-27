@@ -159,10 +159,10 @@ const Contact = () => {
               {activeTab === 'project' ? (
                 <div className="flex flex-col gap-1 items-center md:items-start w-full">
                   <Link 
-                    href="mailto:dhimassandya@gmail.com" 
+                    href="mailto:hello@hollostudio.site" 
                     className="text-xl md:text-2xl font-medium hover:text-brand-red transition-colors leading-none break-all sm:break-normal"
                   >
-                    dhimassandya@gmail.com
+                    	hello@hollostudio.site
                   </Link>
                 </div>
               ) : (
