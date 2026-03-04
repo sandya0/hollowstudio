@@ -46,7 +46,7 @@ export default function RootLayout({ children }) {
       'https://www.linkedin.com/in/sandya-pradayan-baa04b213/',
       'https://x.com/sandyaporto'
     ],
-    image: 'https://hollostudio.site/og-image.jpg',
+    image: 'https://hollostudio.site/hollostudio.png',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Gading Serpong, Tangerang',
