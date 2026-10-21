@@ -22,16 +22,19 @@ export default function SmoothScroll({ children }) {
 
     lenis.on('scroll', ScrollTrigger.update)
 
-    gsap.ticker.add((time) => {
+    // Keep a reference so cleanup removes the same function it added
+    const update = (time) => {
       lenis.raf(time * 1000)
-    })
-    
+    }
+    gsap.ticker.add(update)
+
     gsap.ticker.lagSmoothing(0, 0)
 
     // 5. Cleanup on unmount
     return () => {
+      gsap.ticker.remove(update)
+      lenis.off('scroll', ScrollTrigger.update)
       lenis.destroy()
-      gsap.ticker.remove(lenis.raf)
       delete window.lenis
     }
   }, [])

@@ -5,7 +5,7 @@
   font-family: 'Inter';
   src: url("/fonts/InterDisplay-SemiBold.woff2") format("woff2");
   font-weight: 600;
-  font-style: semibold;
+  font-style: normal;
   font-display: swap; /* Improves perceived load speed */
 }
 
@@ -22,7 +22,6 @@
   /* Colors - Generates text-brand-black, bg-brand-red, etc. */
   --color-brand-black: #1a1a1a;
   --color-brand-red: #FF4B33;
-  --color-brand-white: #F2F0EF;
   --color-brand-white: #F2F0EF;
   --color-brand-grey: #9A9A9A;
 

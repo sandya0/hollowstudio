@@ -330,6 +330,10 @@ export default function FluidText({ text = "FLUID" }) {
           gl.bindTexture(gl.TEXTURE_2D, tex);
           return unit;
         },
+        destroy() {
+          gl.deleteFramebuffer(fb);
+          gl.deleteTexture(tex);
+        },
       };
     }
 
@@ -348,6 +352,10 @@ export default function FluidText({ text = "FLUID" }) {
           f1 = f2;
           f2 = t;
         },
+        destroy() {
+          f1.destroy();
+          f2.destroy();
+        },
       };
     }
 
@@ -362,7 +370,14 @@ export default function FluidText({ text = "FLUID" }) {
     // FBO references
     let outputColor, velocity, divergence, pressure;
 
+    function destroyFBOs() {
+      [outputColor, velocity, divergence, pressure].forEach((f) => f && f.destroy());
+    }
+
     function initFBOs() {
+      // Free the previous set first, otherwise every resize leaks GPU memory
+      destroyFBOs();
+
       const simW = Math.max(2, Math.ceil(window.innerWidth));
       const simH = Math.max(2, Math.ceil(window.innerHeight));
 
@@ -422,6 +437,12 @@ export default function FluidText({ text = "FLUID" }) {
     let animationId = null;
 
     function render(time) {
+      // Stop the loop while the hero is off screen; the observer restarts it
+      if (!isVisible) {
+        animationId = null;
+        return;
+      }
+
         if (time - lastTime < 1000 / targetFPS) {
        animationId = requestAnimationFrame(render);
         return;
@@ -548,12 +569,25 @@ export default function FluidText({ text = "FLUID" }) {
     window.addEventListener("touchmove", onMove, { passive: true });
     window.addEventListener("resize", onResize);
 
+    // Pause rendering while the canvas is scrolled out of view
+    let isVisible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible && animationId === null) {
+        animationId = requestAnimationFrame(render);
+      }
+    });
+    observer.observe(canvas);
+
     // Initialize once
     onResize();
     // Ensure fonts loaded
+    let disposed = false;
+    let fontTimeout;
     document.fonts.ready.then(() => {
+      if (disposed) return;
       updateTextTexture();
-      setTimeout(updateTextTexture, 120);
+      fontTimeout = setTimeout(updateTextTexture, 120);
     });
 
     // small wake-up splashes
@@ -565,7 +599,7 @@ export default function FluidText({ text = "FLUID" }) {
       pointer.moved = true;
     };
     wakeUp();
-    setTimeout(wakeUp, 300);
+    const wakeUpTimeout = setTimeout(wakeUp, 300);
 
     let lastTime = 0;
     const targetFPS = 144;
@@ -576,7 +610,11 @@ export default function FluidText({ text = "FLUID" }) {
 
     // Cleanup
     return () => {
+      disposed = true;
       cancelAnimationFrame(animationId);
+      clearTimeout(fontTimeout);
+      clearTimeout(wakeUpTimeout);
+      observer.disconnect();
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("touchmove", onMove);
       window.removeEventListener("resize", onResize);
@@ -585,6 +623,10 @@ export default function FluidText({ text = "FLUID" }) {
         [splatProg, divergenceProg, pressureProg, gradSubProg, advectProg, displayProg].forEach(p => {
           if (p && p.prog) gl.deleteProgram(p.prog);
         });
+        destroyFBOs();
+        gl.deleteTexture(textTexture);
+        gl.deleteBuffer(quadBuffer);
+        gl.deleteBuffer(quadIndexBuffer);
       } catch (e) {}
     };
   }, [text]);

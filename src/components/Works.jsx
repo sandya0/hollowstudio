@@ -30,6 +30,14 @@ const Works = () => {
       year: 2026,
     },
     {
+      id: 4,
+      name: "Gro.w",
+      type: "Editorial Website",
+      link: "https://gro-w.vercel.app/",
+      image: "/images/grow.png",
+      year: 2026,
+    },
+    {
       id: 3,
       name: "Portfolio",
       type: "Self Branding",
@@ -123,7 +131,7 @@ const Works = () => {
     <section 
       id="projects" 
       onMouseMove={handleMouseMove}
-      className="flex projects flex-col min-h-50vh bg-brand-black text-white relative"
+      className="flex projects flex-col min-h-[50vh] bg-brand-black text-white relative"
     >
       <div className="flex flex-col md:flex-row justify-between items-center md:items-end py-12 px-4 sm:px-6 md:px-12">
         <div className="mb-4 md:mb-0 w-full md:w-auto text-left">
@@ -168,12 +176,14 @@ const Works = () => {
         }}
       >
         {projects.map((project, index) => (
-          <div
+          <a
             key={project.id}
-            className="project-item relative group w-full border-b border-brand-grey/30 cursor-pointer overflow-hidden"
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-item block relative group w-full border-b border-brand-grey/30 cursor-pointer overflow-hidden"
             onMouseEnter={() => handleMouseEnter(index, project)}
             onMouseLeave={() => handleMouseLeave(index)}
-            onClick={() => window.open(project.link, "_blank")}
           >
             <div
               ref={(el) => (overlayRefs.current[index] = el)}
@@ -182,9 +192,9 @@ const Works = () => {
             
             <div className="relative z-10 pt-8 pb-2 md:pt-14 md:pb-3 grid grid-cols-12 gap-x-4 items-end px-4 sm:px-6 md:px-12">
               <div className="col-span-8">
-                <h2 className="text-4xl md:text-6xl font-headline uppercase leading-none tracking-tight group-hover:text-white transition-colors duration-300">
+                <h3 className="text-4xl md:text-6xl font-headline uppercase leading-none tracking-tight group-hover:text-white transition-colors duration-300">
                   {project.name}
-                </h2>
+                </h3>
               </div>
               <div className="col-span-2">
                 <p className="text-sm md:text-base font-medium text-brand-grey group-hover:text-white transition-colors duration-300 pb-1">
@@ -197,18 +207,20 @@ const Works = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
 
       {/* --- MOBILE VIEW --- */}
       <div id="mobile-works-list" className="flex md:hidden flex-col gap-6 pb-12 mt-4 px-4 sm:px-6">
         {projects.map((project) => (
-          <div 
-            key={project.id} 
-            className="mobile-project-card flex flex-col gap-3 "
-            onClick={() => window.open(project.link, "_blank")}
-          > 
+          <a
+            key={project.id}
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mobile-project-card flex flex-col gap-3"
+          >
             <div className="flex flex-col gap-1">
               <div className="flex justify-between items-start">
                  <h3 className="text-3xl font-headline uppercase leading-none text-white">{project.name}</h3>
@@ -230,7 +242,7 @@ const Works = () => {
               />
             </div>
             <div className="w-full h-[1px] bg-brand-grey/20 mt-1"></div>
-          </div>
+          </a>
         ))}
       </div>
     </section>

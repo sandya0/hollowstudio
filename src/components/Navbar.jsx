@@ -266,7 +266,7 @@ const handleScroll = (e, id) => {
         <div className="overlay-contact flex flex-col gap-6 pt-10 border-t border-brand-white">
           <div>
             <p className="tracking-wider text-brand-white text-xs uppercase mb-1">Get in touch</p>
-            <p className="text-xl text-brand-white tracking-widest">hello@hollostudio.com</p>
+            <a href="mailto:hello@hollostudio.site" className="text-xl text-brand-white tracking-widest hover:text-brand-red transition-colors duration-300">hello@hollostudio.site</a>
           </div>
           <div className="flex gap-4">
             {['Instagram', 'Twitter', 'LinkedIn'].map(social => (

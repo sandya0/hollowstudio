@@ -1,10 +1,9 @@
 'use client'
-import { useLayoutEffect, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import imagesLoaded from 'imagesloaded'
 import FluidText from './FluidText'
 import Text from './template/Text'
-import FluidAnimation from './FluidAnimation'
 
 export default function Hero() {
   const containerRef = useRef(null)
@@ -13,11 +12,19 @@ export default function Hero() {
   // Loader Refs
   const loaderRef = useRef(null)
   const percentRef = useRef(null)
-  
-  // State to track readiness
-  const [isExitComplete, setIsExitComplete] = useState(false)
 
-  // 1. Handle the Loading Logic
+  // 1. The Hero Entrance Animation
+  const playHeroEntrance = () => {
+    if (!footerRef.current) return
+    gsap.from(footerRef.current, {
+      opacity: 0,
+      y: 20,
+      duration: 0.8,
+      ease: 'power2.out',
+    })
+  }
+
+  // 2. Handle the Loading Logic
   useEffect(() => {
     const imgLoad = imagesLoaded(document.querySelectorAll('img'))
     const totalImages = imgLoad.images.length
@@ -55,9 +62,7 @@ export default function Hero() {
         if (percentRef.current) percentRef.current.textContent = "100%"
         
         // Trigger Exit Animation
-        const tl = gsap.timeline({
-            onComplete: () => setIsExitComplete(true)
-        })
+        const tl = gsap.timeline()
 
         tl.to(loaderRef.current, {
             duration: 1.6,
@@ -78,19 +83,7 @@ export default function Hero() {
     updateProgress()
 
     return () => cancelAnimationFrame(animationFrameId)
-  }, []) // Rerun logic when webglReady changes
-
-
-  // 2. The Hero Entrance Animation
-  const playHeroEntrance = () => {
-    if (!footerRef.current) return
-    gsap.from(footerRef.current, {
-      opacity: 0,
-      y: 20,
-      duration: 0.8,
-      ease: 'power2.out',
-    })
-  }
+  }, [])
 
   return (
     <section

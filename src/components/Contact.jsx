@@ -148,7 +148,7 @@ const Contact = () => {
           <div className="contact-reveal w-full md:col-span-6 flex flex-col items-center md:items-end text-center md:text-right mb-6 md:mb-0">
             <Text>
               <p className="text-brand-white text-sm md:text-base uppercase tracking-widest mt-1">
-                Let's build something remarkable.
+                Let&apos;s build something remarkable.
               </p>
             </Text>
           </div>

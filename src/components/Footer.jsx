@@ -17,11 +17,6 @@ const Footer = () => {
   // 2. Smooth Scroll Handler
 const handleScroll = (e, id) => {
     e.preventDefault();
-    
-    // If you are in Navbar.jsx and the mobile menu is open, close it
-    if (typeof toggleMenu === 'function' && isOpen) {
-      toggleMenu();
-    }
 
     // Use the global Lenis instance we exposed in SmoothScroll.jsx
     if (window.lenis) {
