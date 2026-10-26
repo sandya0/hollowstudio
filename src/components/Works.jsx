@@ -14,6 +14,14 @@ const Works = () => {
 
   const projects = [
     {
+      id: 5,
+      name: "Studio Kaca",
+      type: "Architecture Concept",
+      link: "https://studio-kaca.vercel.app/",
+      image: "/images/kaca.png",
+      year: 2026,
+    },
+    {
       id: 1,
       name: "UESC",
       type: "Web Development",
