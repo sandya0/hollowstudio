@@ -43,6 +43,16 @@ const servicesData = [
       </svg>
     ),
     description: "We build websites that perform, not just exist. This includes clean development, mobile-first implementation, speed and performance optimization, SEO-ready structure, and deployment setup. The end result is a website that works fast, smooth, and reliably for your users."
+  },
+  {
+    title: 'Branding',
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="9" cy="9" r="6" />
+        <circle cx="15" cy="15" r="6" />
+      </svg>
+    ),
+    description: "We give your brand an identity that carries from the website to everything else. This includes logo and wordmark design, color palette, typography system, and brand guidelines. The result is a brand that looks consistent wherever people meet it."
   }
 ]
 
@@ -105,7 +115,7 @@ const Services = () => {
       </div>
 
       {/* Services Grid */}
-      <div ref={gridRef} className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-x-9 gap-y-16">
+      <div ref={gridRef} className="relative z-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-x-9 gap-y-16">
         
         {servicesData.map((service, index) => (
           <div key={index} className="flex flex-col gap-6">

@@ -24,7 +24,7 @@ const Works = () => {
     {
       id: 2,
       name: "Steric Spes",
-      type: "Architecture Project",
+      type: "Architecture Concept",
       link: "https://stericspes.vercel.app/",
       image: "/images/architecture.png", 
       year: 2026,
