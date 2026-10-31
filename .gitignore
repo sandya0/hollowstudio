@@ -42,3 +42,12 @@ next-env.d.ts
 
 # prospect mockups (other businesses, not for the public repo)
 /prospects
+
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
