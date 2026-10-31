@@ -4,6 +4,14 @@ import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
+// Pre-converted WebP copies served as static files: resizing on the Worker hits Cloudflare's CPU limit (error 1102).
+// Each image has -640/-828/-1200 copies next to the full-size one.
+const imageWidths = [640, 828, 1200];
+const staticImageLoader = ({ src, width }) => {
+  const size = imageWidths.find((w) => w >= width);
+  return size ? src.replace(".webp", `-${size}.webp`) : src;
+};
+
 const Works = () => {
   const [activeProject, setActiveProject] = useState(null);
   const overlayRefs = useRef([]);
@@ -162,7 +170,7 @@ const Works = () => {
                 fill
                 className="object-cover rounded-lg border border-white/20 shadow-2xl"
                 sizes="700px"
-                unoptimized
+                loader={staticImageLoader}
             />
         )}
       </div>
@@ -247,8 +255,9 @@ const Works = () => {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
-                // Pre-converted WebP served as a static file: resizing on the Worker hits Cloudflare's CPU limit (error 1102)
-                unoptimized
+                loader={staticImageLoader}
+                // The preloader waits on these anyway; eager picks the srcset size up front so it doesn't fetch the full-size src as well
+                loading="eager"
               />
             </div>
             <div className="w-full h-[1px] bg-brand-grey/20 mt-1"></div>
