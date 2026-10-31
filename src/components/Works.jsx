@@ -17,7 +17,7 @@ const Works = () => {
       name: "Studio Kaca",
       type: "Architecture Concept",
       link: "https://studio-kaca.vercel.app/",
-      image: "/images/kaca.png",
+      image: "/images/kaca.webp",
       year: 2026,
     },
     {
@@ -25,7 +25,7 @@ const Works = () => {
       name: "UESC",
       type: "Web Development",
       link: "https://uesc2.vercel.app/",
-      image: "/images/UESC.png",
+      image: "/images/UESC.webp",
       year: 2025,
     },
     {
@@ -33,7 +33,7 @@ const Works = () => {
       name: "Steric Spes",
       type: "Architecture Concept",
       link: "https://stericspes.vercel.app/",
-      image: "/images/architecture.png", 
+      image: "/images/architecture.webp",
       year: 2026,
     },
     {
@@ -41,7 +41,7 @@ const Works = () => {
       name: "Gro.w",
       type: "Editorial Website",
       link: "https://gro-w.vercel.app/",
-      image: "/images/grow.png",
+      image: "/images/grow.webp",
       year: 2026,
     },
     {
@@ -49,7 +49,7 @@ const Works = () => {
       name: "Portfolio",
       type: "Self Branding",
       link: "https://sandyaportfolio.vercel.app/",
-      image: "/images/Portfolio.png",
+      image: "/images/Portfolio.webp",
       year: 2025,
     },
   ];
@@ -160,8 +160,9 @@ const Works = () => {
                 src={activeProject.image}
                 alt={`${activeProject.name} - ${activeProject.type}`}
                 fill
-                className="object-cover rounded-lg border border-white/20 shadow-2xl" 
+                className="object-cover rounded-lg border border-white/20 shadow-2xl"
                 sizes="700px"
+                unoptimized
             />
         )}
       </div>
@@ -246,6 +247,8 @@ const Works = () => {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                // Pre-converted WebP served as a static file: resizing on the Worker hits Cloudflare's CPU limit (error 1102)
+                unoptimized
               />
             </div>
             <div className="w-full h-[1px] bg-brand-grey/20 mt-1"></div>
