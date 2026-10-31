@@ -16,68 +16,74 @@ export default function Text({ children, animateOnScroll = true, delay = 0.2 }) 
   const lines = useRef([]);
 
   useGSAP(
-    () => {
+    (context, contextSafe) => {
       if (!containerRef.current) return;
 
-      splitRef.current = [];
-      elementRef.current = [];
-      lines.current = [];
+      // Split in its own task: running every Text block during hydration adds up to one long blocking task
+      const timeout = setTimeout(contextSafe(() => {
+        splitRef.current = [];
+        elementRef.current = [];
+        lines.current = [];
 
-      let elements = [];
-      if (containerRef.current.hasAttribute("data-copy-wrapper")) {
-        elements = Array.from(containerRef.current.children);
-      } else {
-        elements = [containerRef.current];
-      }
-
-      elements.forEach((element) => {
-        elementRef.current.push(element);
-
-        const split = SplitText.create(element, {
-          type: "lines",
-          mask: "lines",
-          linesClass: "line++",
-        });
-
-        splitRef.current.push(split);
-
-        const computedStyle = window.getComputedStyle(element);
-        const textIndent = computedStyle.textIndent;
-
-        if (textIndent && textIndent !== "0px") {
-          if (split.lines.length > 0) {
-            split.lines[0].style.paddingLeft = textIndent;
-          }
-          element.style.textIndent = "0px";
+        let elements = [];
+        if (containerRef.current.hasAttribute("data-copy-wrapper")) {
+          elements = Array.from(containerRef.current.children);
+        } else {
+          elements = [containerRef.current];
         }
 
-        lines.current.push(...split.lines);
-      });
+        elements.forEach((element) => {
+          elementRef.current.push(element);
 
-      gsap.set(lines.current, { y: "100%" });
+          const split = SplitText.create(element, {
+            type: "lines",
+            mask: "lines",
+            linesClass: "line++",
+            // Lines-only split keeps the text readable, so skip the aria-label that isn't allowed on p/span
+            aria: "none",
+          });
 
-      const animationProps = {
-        y: "0%",
-        duration: 1,
-        stagger: 0.1,
-        ease: "power4.out",
-        delay: delay,
-      };
+          splitRef.current.push(split);
 
-      if (animateOnScroll) {
-        gsap.to(lines.current, {
-          ...animationProps,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 100%",
-            once: true,
-          },
+          const computedStyle = window.getComputedStyle(element);
+          const textIndent = computedStyle.textIndent;
+
+          if (textIndent && textIndent !== "0px") {
+            if (split.lines.length > 0) {
+              split.lines[0].style.paddingLeft = textIndent;
+            }
+            element.style.textIndent = "0px";
+          }
+
+          lines.current.push(...split.lines);
         });
-      } else {
-        gsap.to(lines.current, animationProps);
-      }
+
+        gsap.set(lines.current, { y: "100%" });
+
+        const animationProps = {
+          y: "0%",
+          duration: 1,
+          stagger: 0.1,
+          ease: "power4.out",
+          delay: delay,
+        };
+
+        if (animateOnScroll) {
+          gsap.to(lines.current, {
+            ...animationProps,
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 100%",
+              once: true,
+            },
+          });
+        } else {
+          gsap.to(lines.current, animationProps);
+        }
+      }));
 
       return () => {
+        clearTimeout(timeout);
         splitRef.current.forEach((split) => {
           if (split) {
             split.revert();

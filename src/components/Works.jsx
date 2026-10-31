@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Icon } from "@iconify/react";
 
 const Works = () => {
   const [activeProject, setActiveProject] = useState(null);
@@ -232,7 +231,7 @@ const Works = () => {
             <div className="flex flex-col gap-1">
               <div className="flex justify-between items-start">
                  <h3 className="text-3xl font-headline uppercase leading-none text-white">{project.name}</h3>
-                 <Icon icon="lucide:arrow-up-right" className="text-white/70 size-6 transition-colors duration-300" />
+                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" className="text-white/70 size-6 transition-colors duration-300" width="1em" height="1em" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 7h10v10M7 17L17 7" /></svg>
               </div>
               <div className="flex justify-between items-center">
                  <p className="text-sm text-brand-grey">{project.type || "Web Development"}</p>

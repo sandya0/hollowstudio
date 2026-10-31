@@ -1,4 +1,5 @@
 import "./globals.css";
+import { preload } from "react-dom";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata = {
@@ -26,6 +27,10 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  // Fetch fonts alongside the CSS instead of after it, so text doesn't shift when they swap in
+  preload("/fonts/Anton-Regular.woff2", { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
+  preload("/fonts/InterDisplay-SemiBold.woff2", { as: "font", type: "font/woff2", crossOrigin: "anonymous" });
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
