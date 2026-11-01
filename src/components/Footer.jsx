@@ -29,7 +29,10 @@ const handleScroll = (e, id) => {
   };
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+    // Set up in its own task: the section is still under the preloader, and this keeps
+    // GSAP's layout reads out of the long hydration task
+    const ctx = gsap.context(() => {}, footerRef)
+    const timeout = setTimeout(() => ctx.add(() => {
       gsap.from('.footer-item', {
         scrollTrigger: {
           trigger: footerRef.current,
@@ -41,8 +44,11 @@ const handleScroll = (e, id) => {
         stagger: 0.1,
         ease: 'power2.out'
       })
-    }, footerRef)
-    return () => ctx.revert()
+    }))
+    return () => {
+      clearTimeout(timeout)
+      ctx.revert()
+    }
   }, [])
 
   return (

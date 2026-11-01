@@ -61,7 +61,10 @@ const Services = () => {
   const gridRef = useRef(null)
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+    // Set up in its own task: the section is still under the preloader, and this keeps
+    // GSAP's layout reads out of the long hydration task
+    const ctx = gsap.context(() => {}, containerRef)
+    const timeout = setTimeout(() => ctx.add(() => {
       // We only need manual GSAP here for the LINES and the ICONS.
       // The TEXT is now handled by the <Text> component.
 
@@ -90,9 +93,12 @@ const Services = () => {
         ease: 'power2.out'
       })
 
-    }, containerRef)
+    }))
 
-    return () => ctx.revert()
+    return () => {
+      clearTimeout(timeout)
+      ctx.revert()
+    }
   }, [])
 
   return (

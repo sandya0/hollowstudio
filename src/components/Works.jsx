@@ -62,41 +62,47 @@ const Works = () => {
     },
   ];
 
-  useGSAP(() => {
-    gsap.set(previewRef.current, { xPercent: -50, yPercent: -50 });
+  useGSAP((context, contextSafe) => {
+    // Set up in its own task: the section is still under the preloader, and this keeps
+    // GSAP's layout reads out of the long hydration task
+    const timeout = setTimeout(contextSafe(() => {
+      gsap.set(previewRef.current, { xPercent: -50, yPercent: -50 });
 
-    moveX.current = gsap.quickTo(previewRef.current, "x", {
-      duration: 0.5,
-      ease: "power3.out",
-    });
-    moveY.current = gsap.quickTo(previewRef.current, "y", {
-      duration: 0.5,
-      ease: "power3.out",
-    });
+      moveX.current = gsap.quickTo(previewRef.current, "x", {
+        duration: 0.5,
+        ease: "power3.out",
+      });
+      moveY.current = gsap.quickTo(previewRef.current, "y", {
+        duration: 0.5,
+        ease: "power3.out",
+      });
 
-    gsap.from(".project-item", {
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: "#works-list",
-        start: "top 80%",
-      },
-    });
+      gsap.from(".project-item", {
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#works-list",
+          start: "top 80%",
+        },
+      });
 
-    gsap.from(".mobile-project-card", {
-      y: 30,
-      opacity: 0,
-      duration: 0.6,
-      stagger: 0.2,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: "#mobile-works-list",
-        start: "top 85%",
-      },
-    });
+      gsap.from(".mobile-project-card", {
+        y: 30,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#mobile-works-list",
+          start: "top 85%",
+        },
+      });
+    }));
+
+    return () => clearTimeout(timeout);
   }, []);
 
   const handleMouseMove = (e) => {

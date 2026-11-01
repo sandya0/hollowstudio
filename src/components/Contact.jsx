@@ -36,7 +36,10 @@ const Contact = () => {
   }
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
+    // Set up in its own task: the section is still under the preloader, and this keeps
+    // GSAP's layout reads out of the long hydration task
+    const ctx = gsap.context(() => {}, containerRef)
+    const timeout = setTimeout(() => ctx.add(() => {
       gsap.from('.contact-reveal', {
         scrollTrigger: {
           trigger: containerRef.current,
@@ -48,8 +51,11 @@ const Contact = () => {
         stagger: 0.1,
         ease: 'power3.out'
       })
-    }, containerRef)
-    return () => ctx.revert()
+    }))
+    return () => {
+      clearTimeout(timeout)
+      ctx.revert()
+    }
   }, [])
 
   return (
